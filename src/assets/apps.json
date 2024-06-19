@@ -1,0 +1,49 @@
+[
+    {
+        "id": "tp-pendrive-s3-super-wifi-duck",
+        "name": "Super Wifi Duck",
+        "description": "BadUsb/ Keystroke Injection/ Wifi Duck",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/SuperWiFiDuck",
+        "appIcon": "/assets/apps/super-wifi-duck/super-wifi-duck.png",
+        "supportedDevices": [
+            "tp-pendrive-s3"
+        ],
+        "partitions": [{
+            "name": "Firmware",
+            "data": [],
+            "offset": 0,
+            "url": "./assets/apps/super-wifi-duck/app-firmware.bin"
+        }]
+    },
+    {
+        "id": "tp-pendrive-s3-circuit-python",
+        "name": "Circuit Python",
+        "description": "Circuit Python",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/adafruit/circuitpython",
+        "appIcon": "/assets/apps/circuitpython/circuitpython-logo.png",
+        "supportedDevices": [
+            "tp-pendrive-s3"
+        ],
+        "partitions": [{
+            "name": "Firmware",
+            "data": [],
+            "offset": 0,
+            "url": "./assets/apps/circuitpython/circuit-python-bootloader.bin"
+        }]
+    },
+    {
+        "id": "other-device",
+        "name": "Weird Firmware",
+        "description": "Something",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/SuperWiFiDuck",
+        "appIcon": "/assets/apps/super-wifi-duck/super-wifi-duck.png",
+        "supportedDevices": [
+            "tp-default-device"
+        ],
+        "partitions": []
+    }
+]

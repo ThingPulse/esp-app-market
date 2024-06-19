@@ -1,9 +1,9 @@
 [
     {
-        "id": 1,
+        "id": "tp-pendrive-s3",
         "name": "Pendrive S3",
         "manufacturer": "ThingPulse",
-        "image-thumbnail": "assets/devices/pendrive-s3/pendrive-s3.jpg",
+        "imageThumbnail": "assets/devices/pendrive-s3/pendrive-s3-thumb.jpg",
         "productLink": "https://thingpulse.com/product/pendrive-s3/",
         "description": "The Pendrive S3 is a USB flash drive that can be used to store data or to run a custom firmware on a ThingPulse device."
     }

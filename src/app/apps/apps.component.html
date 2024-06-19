@@ -1,0 +1,25 @@
+<h1>{{device?.name}}</h1>
+<mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="device?.imageThumbnail"  alt="Device"/>
+      <mat-card-title>{{device?.name}}</mat-card-title>
+      <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
+
+    </mat-card-header>
+    
+    <mat-card-content>{{device?.description}}</mat-card-content>
+</mat-card>
+
+
+<mat-card *ngFor="let app of apps">
+  <mat-card-header>
+    <img mat-card-avatar [src]="app.appIcon" alt="Device"/>
+    <mat-card-title>{{app.name}}</mat-card-title>
+    <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>{{app?.description}}</mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" [routerLink]="['/device', device?.id, 'app', app.id]">Flash App</button>
+
+  </mat-card-actions>
+</mat-card>

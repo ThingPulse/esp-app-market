@@ -1,0 +1,57 @@
+<mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="app?.appIcon" alt="Device"/>
+      <mat-card-title>{{app?.name}}</mat-card-title>
+      <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        {{app?.description}}
+        {{app?.instructions}}
+
+
+        <div *ngIf="!progresses[0]">{{flasherConsole}}</div>
+        <div *ngFor="let partition of app?.partitions; index as i;" >
+            <div *ngIf="progresses[i]?.progress">
+            {{ partition.name }} {{progresses[i].progress}}%
+            <mat-progress-bar  mode="determinate" [value]="progresses[i].progress"></mat-progress-bar>
+            </div>
+        </div>
+
+  
+        <div class="card" *ngIf="false">
+          <button mat-mat-raised-button color="primary" (click)="connect()">Connect</button>
+          <button mat-mat-raised-button (click)="close()" [disabled]="!isConnected()">Close</button>
+          <button mat-mat-raised-button (click)="startMonitor()" [disabled]="!isConnected() || isMonitoring()">Start Monitor</button>
+          <button mat-mat-raised-button (click)="stopMonitor()" [disabled]="!isConnected()  || !isMonitoring()">Stop Monitor</button>
+          <button mat-mat-raised-button (click)="reset()" [disabled]="!isConnected()">Reset</button>
+          <button mat-mat-raised-button (click)="flash()" [disabled]="!isConnected() || isMonitoring()">Flash</button>
+        </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <div class="flex-row">
+            <div *ngIf="isConnected()">              
+                <span><mat-icon>phonelink</mat-icon> Connected</span>
+            </div>
+            <div *ngIf="!isConnected()">
+                <span><mat-icon>phonelink_off</mat-icon> Disconnected</span>
+            </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="flash()">Flash App</button>
+  
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-expansion-panel expanded="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+
+        Serial Console Output
+
+      </mat-panel-title>
+      <mat-panel-description>
+          Messages: {{messageCount}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <textarea class="serial-console"  #console [scrollTop]="console.scrollHeight" [(ngModel)]='messageArea' rows="20" cols="90%">                             
+    </textarea>
+  </mat-expansion-panel>

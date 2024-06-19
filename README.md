@@ -1,12 +1,7 @@
-# ESP-IoT-Flasher
+# ESP-Firmware-Store
 
-The ESP-IoT-Flasher is web-based tool which is made for simplicity of use.
-A device tester just needs to install the UART driver. After opening the application
-in his browser he selects the device and clicks `Flash & Test`. The web application
-then flashes a firmware to the device and the device responds with tests results from tests
-running on the device.
+The ESP-Firmware-Store is web-based tool which is made for simplicity of use.
 
-[![Running the test](https://img.youtube.com/vi/a3fYCeyGAyI/maxresdefault.jpg)](https://www.youtube.com/shorts/a3fYCeyGAyI)
 
 ## Development server
 
@@ -24,11 +19,11 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ### Building docker for local machine architecture
 
-`docker build -t thingpulse/esp-iot-flasher:1.0.2 . `
+`docker build -t thingpulse/esp-app-market:1.0.2 . `
 
 ### building docker on ARM for x86
 
-`docker buildx build --platform linux/amd64 -t thingpulse/esp-iot-flasher:1.0.2 .`
+`docker buildx build --platform linux/amd64 -t thingpulse/esp-app-market:1.0.2 .`
 
 ### Running with docker-compose
 
@@ -40,9 +35,7 @@ will start the service at http://localhost:8081
 ## Changing device configuration
 
 Default configurations loads the browser from the server. The angular application looks for a configuration
-file at `/assets/defaultDeviceConfiguration.json`: 
-
-https://github.com/ThingPulse/esp-iot-flasher/blob/1c669c1fe53238a759b6027cf89888fffa4055e9/src/assets/defaultDeviceConfiguration.json#L1-L24
+file at `/assets/defaultDeviceConfiguration.json`
 
 ### Explanation
 
@@ -66,7 +59,7 @@ Adapt and uncomment the following lines to use your own configuration files in `
 ## Creating firmware to run the test
 
 The following repository shows how to build a firmware which can be used together with the
-esp-iot-flasher: https://github.com/ThingPulse/esp32-epulse-feather-testbed
+esp-app-market: https://github.com/ThingPulse/esp32-epulse-feather-testbed
 
 ## FAQ
 

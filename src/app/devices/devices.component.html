@@ -1,0 +1,13 @@
+<mat-card *ngFor="let device of devices">
+    <mat-card-header>
+      <img mat-card-avatar [src]="device.imageThumbnail"  alt="Device"/>
+      <mat-card-title>{{device.name}}</mat-card-title>
+      <mat-card-subtitle>{{device.manufacturer}}</mat-card-subtitle>
+
+    </mat-card-header>
+    
+    <mat-card-content>{{device.description}}</mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button [routerLink]="['/device', device.id]">Apps</button>
+      </mat-card-actions>
+</mat-card>

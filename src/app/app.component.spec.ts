@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'esp-iot-flasher'`, () => {
+  it(`should have as title 'esp-app-market'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('esp-iot-flasher');
+    expect(app.title).toEqual('esp-app-market');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('esp-iot-flasher app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('esp-app-market app is running!');
   });
 });
