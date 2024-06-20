@@ -37,6 +37,36 @@
         "tags": ["circuit-python", "adafruit", "microcontroller", "embedded"]
     },
     {
+        "id": "tp-pendrive-s3-fido2-u2f-key",
+        "name": "FIDO2 U2F Key",
+        "description": "Turns your Pendrive S3 into an U2F key. Please note: this is currently for learning purposes only and not secure, as the private key is stored on the device and not protected from extraction.",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/jocover/esp32_u2f",
+        "appIcon": "/assets/apps/esp32-u2f/esp32-u2f.jpg",
+        "supportedDevices": [
+            "tp-pendrive-s3"
+        ],
+        "partitions": [{
+            "name": "Bootloader",
+            "data": [],
+            "offset": "0x0",
+            "url": "./assets/apps/esp32-u2f/bootloader.bin"
+        },
+        {
+            "name": "Partition Table",
+            "data": [],
+            "offset": "0x8000",
+            "url": "./assets/apps/esp32-u2f/partition-table.bin"},
+        {
+            "name": "Firmware",
+            "data": [],
+            "offset": "0x10000",
+            "url": "./assets/apps/esp32-u2f/esp32_u2f.bin"
+        }],
+        "tags": ["fido2", "u2f", "security", "authentication", "webauthn"]
+    },
+    {
         "id": "other-device",
         "name": "Weird Firmware",
         "description": "Something",
