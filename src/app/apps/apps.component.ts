@@ -15,6 +15,7 @@ export class AppsComponent implements OnInit{
   deviceId: string;
   device: Device | undefined;
   apps: App[];
+  searchText: string;
 
   constructor(private route: ActivatedRoute, 
               public deviceService: DevicesService,

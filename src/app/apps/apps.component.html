@@ -23,13 +23,21 @@
 
 
 <h1>Applications</h1>
-<mat-card *ngFor="let app of apps">
+<mat-form-field class="example-form-field">
+  <mat-label>Search Applications</mat-label>
+  <input matInput type="text" [(ngModel)]="searchText">
+</mat-form-field>
+
+<mat-card *ngFor="let app of apps | fullTextFilter: searchText">
   <mat-card-header>
     <img mat-card-avatar [src]="app.appIcon" alt="Device"/>
     <mat-card-title>{{app.name}}</mat-card-title>
     <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <p>
+      <mat-chip *ngFor="let tag of app?.tags">{{tag}}</mat-chip>
+    </p>
     <p>
       {{app?.description}}
     </p>

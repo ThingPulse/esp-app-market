@@ -11,6 +11,7 @@ import { AppsComponent } from './apps/apps.component';
 import { CacheInterceptor } from './services/cache.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlasherComponent } from './flasher/flasher.component';
+import { FullTextFilterPipe } from './services/full-text-filter.pipe';
 
 const routes: Routes = [
   { path: '', component: DevicesComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
     AppComponent,
     DevicesComponent,
     AppsComponent,
-    FlasherComponent
+    FlasherComponent,
+    FullTextFilterPipe
   ],
   imports: [
     BrowserModule,

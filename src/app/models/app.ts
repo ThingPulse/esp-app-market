@@ -10,4 +10,5 @@ export interface App {
     instructions: string;
     supportedDevices: string[];
     partitions: Partition[];
+    tags: string[];
 }

@@ -1,10 +1,22 @@
 <h1>Devices</h1>
-<mat-card *ngFor="let device of devices">
+<mat-form-field class="example-form-field">
+  <mat-label>Search Devices</mat-label>
+  <input matInput type="text" [(ngModel)]="searchText">
+</mat-form-field>
+
+<mat-card *ngFor="let device of devices | fullTextFilter: searchText">
     <mat-card-header>
       <img mat-card-avatar [src]="device.imageThumbnail"  alt="Device"/>
       <mat-card-title>{{device.name}}</mat-card-title>
       <mat-card-subtitle>{{device.manufacturer}}</mat-card-subtitle>
 
+    </mat-card-header>
+    <mat-card-header>
+      <mat-card-title-group>
+        <img mat-card-sm-image [src]="device?.image"  alt="Device"/>
+        <mat-card-title>{{device?.name}}</mat-card-title>
+        <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
+      </mat-card-title-group>
     </mat-card-header>
     
     <mat-card-content>

@@ -13,7 +13,12 @@
     justify-content: space-between;
   }
 
-  .mdc-card {
+.mdc-card {
     margin-bottom: 10px;
 }
 
+mat-chip {
+  padding: 0px 0px !important;
+  margin: 0px 2px !important;
+  font-size:smaller;
+}

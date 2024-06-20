@@ -9,6 +9,7 @@ import { Device } from '../models/device';
 })
 export class DevicesComponent implements OnInit {
   
+  searchText: string = '';
   devices: Device[] = [];
 
   constructor(public deviceService: DevicesService) { }

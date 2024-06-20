@@ -14,7 +14,8 @@
             "data": [],
             "offset": 0,
             "url": "./assets/apps/super-wifi-duck/app-firmware.bin"
-        }]
+        }],
+        "tags": ["badusb", "keystroke-injection", "wifi-duck", "hid", "usb-rubber-ducky", "keyboard", "mouse"]
     },
     {
         "id": "tp-pendrive-s3-circuit-python",
@@ -32,7 +33,8 @@
             "data": [],
             "offset": 0,
             "url": "./assets/apps/circuitpython/circuit-python-bootloader.bin"
-        }]
+        }],
+        "tags": ["circuit-python", "adafruit", "microcontroller", "embedded"]
     },
     {
         "id": "other-device",
