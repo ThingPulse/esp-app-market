@@ -1,16 +1,23 @@
-<h1>{{device?.name}}</h1>
-<mat-card>
-    <mat-card-header>
-      <img mat-card-avatar [src]="device?.imageThumbnail"  alt="Device"/>
-      <mat-card-title>{{device?.name}}</mat-card-title>
-      <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
 
+<p>
+  <a routerLink="/">Back to Device Overview</a>
+</p>
+<mat-card class="device-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <img mat-card-sm-image [src]="device?.image"  alt="Device"/>
+        <mat-card-title>{{device?.name}}</mat-card-title>
+        <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
+      </mat-card-title-group>
     </mat-card-header>
-    
-    <mat-card-content>{{device?.description}}</mat-card-content>
+    <mat-card-content>
+      <p>{{device?.description}}</p>
+      <p>Learn more about the <a [href]="device?.productLink" target="_blank">{{device?.name}}</a></p>
+    </mat-card-content>
 </mat-card>
 
 
+<h1>Applications</h1>
 <mat-card *ngFor="let app of apps">
   <mat-card-header>
     <img mat-card-avatar [src]="app.appIcon" alt="Device"/>

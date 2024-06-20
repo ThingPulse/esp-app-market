@@ -1,3 +1,8 @@
 .mdc-card {
     margin-bottom: 10px;
 }
+
+.device-card {
+    background-color:#f5f5f5;
+    margin-bottom: 30px;
+}

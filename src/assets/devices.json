@@ -4,7 +4,8 @@
         "name": "Pendrive S3",
         "manufacturer": "ThingPulse",
         "imageThumbnail": "assets/devices/pendrive-s3/pendrive-s3-thumb.jpg",
-        "productLink": "https://thingpulse.com/product/pendrive-s3/",
-        "description": "The Pendrive S3 is a USB flash drive that can be used to store data or to run a custom firmware on a ThingPulse device."
+        "image": "assets/devices/pendrive-s3/pendrive-s3.jpg",
+        "productLink": "https://thingpulse.com/product/esp32-s3-pendrive-s3-128mb/",
+        "description": "The ThingPulse Pendrive S3 is an ESP32-S3 device with USB-C plug, WS2812B RGB LED and 128MB of flash. With the help of TinyUSB the ESP32-S3 can pretend to be many USB devices, such as keyboard, mouse, memory stick etc."
     }
 ]
