@@ -1,6 +1,6 @@
-# ESP-Firmware-Store
+# Esp-App-Market
 
-The ESP-Firmware-Store is web-based tool which is made for simplicity of use.
+The Esp-App-Market is web-based tool to flash firmware to Espressif based microcontrollers
 
 
 ## Development server
@@ -19,11 +19,11 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ### Building docker for local machine architecture
 
-`docker build -t thingpulse/esp-app-market:1.0.2 . `
+`docker build -t thingpulse/esp-app-market:1.0.0 . `
 
 ### building docker on ARM for x86
 
-`docker buildx build --platform linux/amd64 -t thingpulse/esp-app-market:1.0.2 .`
+`docker buildx build --platform linux/amd64 -t thingpulse/esp-app-market:1.0.0 .`
 
 ### Running with docker-compose
 
