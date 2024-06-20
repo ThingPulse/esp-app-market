@@ -2,7 +2,9 @@
     {
         "id": "tp-pendrive-s3",
         "name": "Pendrive S3",
+        "mcuFamily": "esp32-s3",
         "manufacturer": "ThingPulse",
+        "tags": ["esp32-s3", "UBC-C", "WS2812B RGB LED", "128MB flash", "pendrive", "ThingPulse"],
         "imageThumbnail": "assets/devices/pendrive-s3/pendrive-s3-thumb.jpg",
         "image": "assets/devices/pendrive-s3/pendrive-s3.jpg",
         "productLink": "https://thingpulse.com/product/esp32-s3-pendrive-s3-128mb/",

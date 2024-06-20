@@ -21,7 +21,7 @@
         "name": "Circuit Python",
         "description": "Circuit Python",
         "instructions": "",
-        "version": "1.0.0",
+        "version": "9.0.5",
         "repository": "https://github.com/adafruit/circuitpython",
         "appIcon": "/assets/apps/circuitpython/circuitpython-logo.png",
         "supportedDevices": [

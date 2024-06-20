@@ -9,7 +9,12 @@
       <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        {{app?.description}}
+        <p>
+          {{app?.description}}
+        </p>
+        <p>
+          Source: <a [href]="app?.repository" target="_blank">{{app?.repository}}</a>
+        </p>
         {{app?.instructions}}
 
 

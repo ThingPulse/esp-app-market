@@ -11,7 +11,12 @@
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-      <p>{{device?.description}}</p>
+      <p>
+        <mat-chip *ngFor="let tag of device?.tags">{{tag}}</mat-chip>
+      </p>
+      <p>
+        {{device?.description}}
+      </p>
       <p>Learn more about the <a [href]="device?.productLink" target="_blank">{{device?.name}}</a></p>
     </mat-card-content>
 </mat-card>
@@ -24,7 +29,14 @@
     <mat-card-title>{{app.name}}</mat-card-title>
     <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>{{app?.description}}</mat-card-content>
+  <mat-card-content>
+    <p>
+      {{app?.description}}
+    </p>
+    <p>
+      Source: <a [href]="app?.repository" target="_blank">{{app?.repository}}</a>
+    </p>
+  </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="primary" [routerLink]="['/device', device?.id, 'app', app.id]">Flash App</button>
 

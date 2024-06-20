@@ -7,7 +7,14 @@
 
     </mat-card-header>
     
-    <mat-card-content>{{device.description}}</mat-card-content>
+    <mat-card-content>
+      <p>
+        <mat-chip *ngFor="let tag of device?.tags">{{tag}}</mat-chip>
+      </p>
+      <p>
+        {{device.description}}
+      </p>
+    </mat-card-content>
     <mat-card-actions>
         <button mat-raised-button [routerLink]="['/device', device.id]">Apps</button>
       </mat-card-actions>
