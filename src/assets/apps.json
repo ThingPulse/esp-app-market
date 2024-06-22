@@ -67,6 +67,36 @@
         "tags": ["fido2", "u2f", "security", "authentication", "webauthn"]
     },
     {
+        "id": "tp-pendrive-s3-wifi-dongle",
+        "name": "WiFi Dongle",
+        "description": "Turns the Pendrive S3 into a WiFi dongle so that your computer can connect to the internet.",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle",
+        "appIcon": "/assets/apps/wifi-dongle/wifi-dongle.png",
+        "supportedDevices": [
+            "tp-pendrive-s3"
+        ],
+        "partitions": [{
+            "name": "Bootloader",
+            "data": [],
+            "offset": "0x0",
+            "url": "./assets/apps/wifi-dongle/bootloader.bin"
+        },
+        {
+            "name": "Partition Table",
+            "data": [],
+            "offset": "0x8000",
+            "url": "./assets/apps/wifi-dongle/partition-table.bin"},
+        {
+            "name": "Firmware",
+            "data": [],
+            "offset": "0x10000",
+            "url": "./assets/apps/wifi-dongle/usb_dongle.bin"
+        }],
+        "tags": ["network", "wifi", "wifi-dongle"]
+    },
+    {
         "id": "other-device",
         "name": "Weird Firmware",
         "description": "Something",
