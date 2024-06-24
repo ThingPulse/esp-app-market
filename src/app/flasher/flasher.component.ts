@@ -7,6 +7,7 @@ import { App } from '../models/app';
 import { EspPortService } from '../services/esp-port.service';
 import { PartitionProgress } from '../services/utils.service';
 import { Subscription } from 'rxjs';
+import { AppVersion } from '../models/app-version';
 
 @Component({
   selector: 'app-flasher',
@@ -28,6 +29,7 @@ export class FlasherComponent  implements OnInit{
   messageArea: string = "";
   messageCount = 0;
   flasherConsole: string;
+  selectedVersion: AppVersion | undefined;
   progresses: PartitionProgress[] = new Array();
 
   constructor(private route: ActivatedRoute, 
@@ -44,6 +46,7 @@ export class FlasherComponent  implements OnInit{
     console.log(this.device);
     this.appService.findById(this.appId).subscribe((app) => {
       this.app = app;
+      this.selectedVersion = this.app?.versions[0];
     });
     const portStateStreamSubscription = this.portService.portStateStream.subscribe(isConnected => {
       console.log("isConnected: ", isConnected);
@@ -80,7 +83,7 @@ export class FlasherComponent  implements OnInit{
     this.messageArea = ""
     this.messageCount = 0;
     this.flasherConsole = "Ready";
-    this.progresses = new Array(this.app?.partitions.length);
+    this.progresses = new Array(this.selectedVersion?.partitions.length);
   }
 
   connect() {
@@ -118,7 +121,7 @@ export class FlasherComponent  implements OnInit{
   async flash() {
     console.log("Flashing");
     this.resetState();
-    if (this.app && this.app.partitions) {
+    if (this.app && this.selectedVersion?.partitions) {
       try {
         await this.portService.connect();
         console.log("Connected");
@@ -128,7 +131,7 @@ export class FlasherComponent  implements OnInit{
           return;
         }
         console.log("Flashing");
-        await this.portService.flash(this.app.partitions);
+        await this.portService.flash(this.selectedVersion.partitions);
     } else {
       console.log("No app selected");
     }

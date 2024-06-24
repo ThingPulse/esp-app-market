@@ -9,12 +9,16 @@
         "supportedDevices": [
             "tp-pendrive-s3"
         ],
-        "partitions": [{
-            "name": "Firmware",
-            "data": [],
-            "offset": 0,
-            "url": "./assets/apps/super-wifi-duck/app-firmware.bin"
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Firmware",
+                "data": [],
+                "offset": 0,
+                "url": "./assets/apps/super-wifi-duck/app-firmware.bin"
+            }]
         }],
+
         "tags": ["badusb", "keystroke-injection", "wifi-duck", "hid", "usb-rubber-ducky", "keyboard", "mouse"]
     },
     {
@@ -28,12 +32,16 @@
         "supportedDevices": [
             "tp-pendrive-s3"
         ],
-        "partitions": [{
-            "name": "Firmware",
-            "data": [],
-            "offset": 0,
-            "url": "./assets/apps/circuitpython/circuit-python-bootloader.bin"
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Firmware",
+                "data": [],
+                "offset": 0,
+                "url": "./assets/apps/circuitpython/circuit-python-bootloader.bin"
+            }]
         }],
+
         "tags": ["circuit-python", "adafruit", "microcontroller", "embedded"]
     },
     {
@@ -47,22 +55,25 @@
         "supportedDevices": [
             "tp-pendrive-s3"
         ],
-        "partitions": [{
-            "name": "Bootloader",
-            "data": [],
-            "offset": "0x0",
-            "url": "./assets/apps/esp32-u2f/bootloader.bin"
-        },
-        {
-            "name": "Partition Table",
-            "data": [],
-            "offset": "0x8000",
-            "url": "./assets/apps/esp32-u2f/partition-table.bin"},
-        {
-            "name": "Firmware",
-            "data": [],
-            "offset": "0x10000",
-            "url": "./assets/apps/esp32-u2f/esp32_u2f.bin"
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Bootloader",
+                "data": [],
+                "offset": "0x0",
+                "url": "./assets/apps/esp32-u2f/bootloader.bin"
+            },
+            {
+                "name": "Partition Table",
+                "data": [],
+                "offset": "0x8000",
+                "url": "./assets/apps/esp32-u2f/partition-table.bin"},
+            {
+                "name": "Firmware",
+                "data": [],
+                "offset": "0x10000",
+                "url": "./assets/apps/esp32-u2f/esp32_u2f.bin"
+            }]
         }],
         "tags": ["fido2", "u2f", "security", "authentication", "webauthn"]
     },
@@ -77,22 +88,25 @@
         "supportedDevices": [
             "tp-pendrive-s3"
         ],
-        "partitions": [{
-            "name": "Bootloader",
-            "data": [],
-            "offset": "0x0",
-            "url": "./assets/apps/wifi-dongle/bootloader.bin"
-        },
-        {
-            "name": "Partition Table",
-            "data": [],
-            "offset": "0x8000",
-            "url": "./assets/apps/wifi-dongle/partition-table.bin"},
-        {
-            "name": "Firmware",
-            "data": [],
-            "offset": "0x10000",
-            "url": "./assets/apps/wifi-dongle/usb_dongle.bin"
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Bootloader",
+                "data": [],
+                "offset": "0x0",
+                "url": "./assets/apps/wifi-dongle/bootloader.bin"
+            },
+            {
+                "name": "Partition Table",
+                "data": [],
+                "offset": "0x8000",
+                "url": "./assets/apps/wifi-dongle/partition-table.bin"},
+            {
+                "name": "Firmware",
+                "data": [],
+                "offset": "0x10000",
+                "url": "./assets/apps/wifi-dongle/usb_dongle.bin"
+            }]
         }],
         "tags": ["network", "wifi", "wifi-dongle"]
     },
@@ -106,6 +120,10 @@
         "supportedDevices": [
             "tp-default-device"
         ],
-        "partitions": []
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": []
+        }]
+        
     }
 ]

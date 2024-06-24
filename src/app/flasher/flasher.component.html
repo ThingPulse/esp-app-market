@@ -22,7 +22,7 @@
 
 
         <div *ngIf="!progresses[0]">{{flasherConsole}}</div>
-        <div *ngFor="let partition of app?.partitions; index as i;" >
+        <div *ngFor="let partition of selectedVersion?.partitions; index as i;" >
             <div *ngIf="progresses[i]?.progress">
             {{ partition.name }} {{progresses[i].progress}}%
             <mat-progress-bar  mode="determinate" [value]="progresses[i].progress"></mat-progress-bar>

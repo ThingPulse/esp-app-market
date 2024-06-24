@@ -1,4 +1,5 @@
 import { Partition } from "../services/utils.service";
+import { AppVersion } from "./app-version";
 
 export interface App {
     id: string;
@@ -9,6 +10,6 @@ export interface App {
     appIcon: string;
     instructions: string;
     supportedDevices: string[];
-    partitions: Partition[];
+    versions: AppVersion[];
     tags: string[];
 }
