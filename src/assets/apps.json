@@ -111,6 +111,39 @@
         "tags": ["network", "wifi", "wifi-dongle"]
     },
     {
+        "id": "tp-pendrive-s3-wifi-usb-disk",
+        "name": "WiFi USB Disk",
+        "description": "After plugin the device into a computer it will mount like a regular memory stick. At the same time it starts a WiFi Access Point with a webserver. A user can then access the files stored on the memory stick over this web interface.",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/esp32-s3-pendrive-wireless-usb-disk",
+        "appIcon": "/assets/apps/wifi-usb-disk/wifi-usb-disk.jpg",
+        "supportedDevices": [
+            "tp-pendrive-s3"
+        ],
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Bootloader",
+                "data": [],
+                "offset": "0x0",
+                "url": "./assets/apps/wifi-usb-disk/bootloader.bin"
+            },
+            {
+                "name": "Partition Table",
+                "data": [],
+                "offset": "0x8000",
+                "url": "./assets/apps/wifi-usb-disk/partitions.bin"},
+            {
+                "name": "Firmware",
+                "data": [],
+                "offset": "0x10000",
+                "url": "./assets/apps/wifi-usb-disk/firmware.bin"
+            }]
+        }],
+        "tags": ["network", "wifi", "wifi-dongle"]
+    },
+    {
         "id": "other-device",
         "name": "Weird Firmware",
         "description": "Something",
