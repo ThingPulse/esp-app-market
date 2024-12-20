@@ -144,6 +144,46 @@
         "tags": ["network", "wifi", "wifi-dongle"]
     },
     {
+        "id": "tp-color-kit-grande-screen-test",
+        "name": "Color Kit Grande TestBed",
+        "description": "Shows 4 colorful dots on the screen and allows you to draw with your finger. ",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/thingpulse/color-kit-grande-testbed",
+        "appIcon": "/assets/apps/ckg-testbed/testbed.jpg",
+        "supportedDevices": [
+            "tp-color-kit-grande"
+        ],
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Bootloader",
+                "data": [],
+                "offset": "0x1000",
+                "url": "./assets/apps/ckg-testbed/bootloader.bin"
+            },
+            {
+                "name": "Partition Table",
+                "data": [],
+                "offset": "0x8000",
+                "url": "./assets/apps/ckg-testbed/partitions.bin"
+            },
+            {
+                "name": "Boot App",
+                "data": [],
+                "offset": "0xe000",
+                "url": "./assets/apps/ckg-testbed/boot_app0.bin"
+            },
+            {
+                "name": "Firmware",
+                "data": [],
+                "offset": "0x10000",
+                "url": "./assets/apps/ckg-testbed/firmware.bin"
+            }]
+        }],
+        "tags": ["touch-screen", "esp32"]
+    },
+    {
         "id": "other-device",
         "name": "Weird Firmware",
         "description": "Something",

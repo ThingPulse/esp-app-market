@@ -9,5 +9,17 @@
         "image": "assets/devices/pendrive-s3/pendrive-s3.jpg",
         "productLink": "https://thingpulse.com/product/esp32-s3-pendrive-s3-128mb/",
         "description": "The ThingPulse Pendrive S3 is an ESP32-S3 device with USB-C plug, WS2812B RGB LED and 128MB of flash. With the help of TinyUSB the ESP32-S3 can pretend to be many USB devices, such as keyboard, mouse, memory stick etc."
+    },
+    {
+        "id": "tp-color-kit-grande",
+        "name": "Color Kit Grande",
+        "mcuFamily": "esp32",
+        "manufacturer": "ThingPulse",
+        "tags": ["esp32", "UBC-C", "ThingPulse"],
+        "imageThumbnail": "assets/devices/color-kit-grande/color-kit-grande-thumb.jpg",
+        "image": "assets/devices/color-kit-grande/color-kit-grande.jpg",
+        "productLink": "https://thingpulse.com/products/color-kit-grande/index.html",
+        "description": "The ThingPulse Color Kit Grande is an ESP32 device with USB-C plug."
     }
+
 ]
