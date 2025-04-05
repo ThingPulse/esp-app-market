@@ -184,6 +184,47 @@
         "tags": ["touch-screen", "esp32"]
     },
     {
+        "id": "tp-color-kit-grande-ckos",
+        "name": "Color Kit OS",
+        "description": "Operating System For the Color Kit Devices",
+        "instructions": "",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/color-kit-os",
+        "appIcon": "/assets/apps/ckg-color-kit-os/CKOS.jpeg",
+        "supportedDevices": [
+            "tp-color-kit-grande"
+        ],
+
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "Bootloader",
+                "data": [],
+                "offset": "0x1000",
+                "url": "./assets/apps/ckg-color-kit-os/bootloader.bin"
+            },
+            {
+                "name": "Partition Table",
+                "data": [],
+                "offset": "0x8000",
+                "url": "./assets/apps/ckg-color-kit-os/partitions.bin"
+            },
+            {
+                "name": "Boot App",
+                "data": [],
+                "offset": "0xe000",
+                "url": "./assets/apps/ckg-color-kit-os/boot_app0.bin"
+            },
+            {
+                "name": "Firmware",
+                "data": [],
+                "offset": "0x10000",
+                "url": "./assets/apps/ckg-color-kit-os/firmware.bin"
+            }]
+        }],
+        "tags": ["touch-screen", "esp32"]
+    },
+    {
         "id": "other-device",
         "name": "Weird Firmware",
         "description": "Something",
