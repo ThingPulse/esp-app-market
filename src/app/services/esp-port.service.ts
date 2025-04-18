@@ -72,7 +72,10 @@ export class EspPortService {
       await this.close();
       this.setState(false);
     }
-
+    if (!navigator.serial) {
+      this.monitorMessageSource.next("This browser does not support WebSerial API.\nPlease use Chrome or Edge...");
+      return;
+    }
     const port = await navigator.serial.requestPort();
     this.transport = new Transport(port);
     try {

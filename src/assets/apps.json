@@ -188,7 +188,7 @@
         "name": "Color Kit OS",
         "description": "Operating System For the Color Kit Devices",
         "instructions": "",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "repository": "https://github.com/ThingPulse/color-kit-os",
         "appIcon": "/assets/apps/ckg-color-kit-os/CKOS.jpeg",
         "supportedDevices": [
