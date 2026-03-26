@@ -31,6 +31,7 @@ export class FlasherComponent  implements OnInit{
   flasherConsole: string;
   selectedVersion: AppVersion | undefined;
   progresses: PartitionProgress[] = new Array();
+  eraseAll = false;
 
   constructor(private route: ActivatedRoute, 
               public deviceService: DevicesService,
@@ -131,7 +132,7 @@ export class FlasherComponent  implements OnInit{
           return;
         }
         console.log("Flashing");
-        await this.portService.flash(this.selectedVersion.partitions);
+        await this.portService.flash(this.selectedVersion.partitions, this.eraseAll);
     } else {
       console.log("No app selected");
     }

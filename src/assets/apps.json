@@ -228,7 +228,7 @@
     {
         "id": "tp-icon-256-test-app",
         "name": "Test APP for Icon256",
-        "description": "Interactive LED/button test for the 16x16 matrix. \nOn startup, all LEDs are set to white.<BR/>BTN1 (GPIO 11) cycles all LEDs through red, green, blue, and white, then repeats.<BR/>BTN1 also resets the single-pixel mode index to 0.<BR/>BTN2 (GPIO 12) enables single-pixel mode: all other LEDs are turned off, one white pixel is shown, and the active pixel advances by one on each press (with wraparound).<BR/>BTN3 (GPIO 13) is currently unused in this test.",
+        "description": "Interactive LED/button test for the 16x16 matrix. On startup, all LEDs are set to white. BTN1 (GPIO 11) cycles all LEDs through red, green, blue, and white, then repeats. BTN1 also resets the single-pixel mode index to 0. BTN2 (GPIO 12) enables single-pixel mode: all other LEDs are turned off, one white pixel is shown, and the active pixel advances by one on each press (with wraparound). BTN3 (GPIO 13) is currently unused in this test.",
         "version": "1.0.0",
         "repository": "https://github.com/ThingPulse/icon256-testbed",
         "appIcon": "/assets/devices/icon256/icon256-thumb.png",
@@ -242,6 +242,27 @@
                 "data": [],
                 "offset": "0x0",
                 "url": "./assets/apps/icon256-test-app/app-firmware.bin"
+            }]
+        }]
+        
+    },
+    {
+        "id": "tp-icon-256-wled",
+        "name": "WLED for Icon256",
+        "description": "Icon256 WordClock firmware.",
+        "version": "1.0.0",
+        "repository": "https://github.com/ThingPulse/WLED-Icon256/",
+        "appIcon": "/assets/devices/icon256/icon256-thumb.png",
+        "supportedDevices": [
+            "tp-icon-256"
+        ],
+        "versions": [{
+            "name": "1.0.0",
+            "partitions": [{
+                "name": "App Firmware",
+                "data": [],
+                "offset": "0x0",
+                "url": "./assets/apps/icon256-wled/app-firmware-20260226.bin"
             }]
         }]
         

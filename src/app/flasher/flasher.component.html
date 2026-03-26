@@ -48,7 +48,12 @@
                 <span><mat-icon>phonelink_off</mat-icon> Disconnected</span>
             </div>
         </div>
-        <button mat-raised-button color="primary" (click)="flash()">Flash App</button>
+        <div>
+          <button mat-raised-button color="primary" (click)="flash()">Flash App</button>
+          <div>
+            <mat-checkbox [(ngModel)]="eraseAll">Erase complete flash before writing</mat-checkbox>
+          </div>
+        </div>
   
     </mat-card-actions>
   </mat-card>

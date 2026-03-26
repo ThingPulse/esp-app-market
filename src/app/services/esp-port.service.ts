@@ -236,7 +236,7 @@ export class EspPortService {
     console.log("Leaving read loop...");
   }
   
-  async flash(partitions: Partition[]) {
+  async flash(partitions: Partition[], eraseAll = false) {
     await this.loadData(partitions);
     try {
       console.log("connecting...");
@@ -252,7 +252,7 @@ export class EspPortService {
           const flashOptions: FlashOptions = {
             fileArray: fileArray,
             flashSize: "keep",
-            eraseAll: false,
+            eraseAll,
             compress: true,
             reportProgress: (fileIndex, written, total) => {
               this.flashProgressSource.next({index: fileIndex, progress: Math.round((written / total) * 100)});
