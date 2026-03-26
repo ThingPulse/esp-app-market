@@ -238,22 +238,10 @@
         "versions": [{
             "name": "1.0.0",
             "partitions": [{
-                "name": "Bootloader",
+                "name": "App Firmware",
                 "data": [],
                 "offset": "0x0",
-                "url": "./assets/apps/icon256-test-app/bootloader.bin"
-            },
-            {
-                "name": "Partition Table",
-                "data": [],
-                "offset": "0x8000",
-                "url": "./assets/apps/icon256-test-app/partitions.bin"
-            },
-            {
-                "name": "Firmware",
-                "data": [],
-                "offset": "0xe000",
-                "url": "./assets/apps/icon256-test-app/firmware.bin"
+                "url": "./assets/apps/icon256-test-app/app-firmware.bin"
             }]
         }]
         

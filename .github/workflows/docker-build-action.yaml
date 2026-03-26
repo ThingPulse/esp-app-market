@@ -25,5 +25,5 @@ jobs:
           context: .
           push: true
           tags: |
-            thingpulse/esp-app-market:1.0.10
+            thingpulse/esp-app-market:1.0.11
             thingpulse/esp-app-market:latest
