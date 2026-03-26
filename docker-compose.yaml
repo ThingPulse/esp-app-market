@@ -2,7 +2,7 @@ version: '2'
 services:
     message-server:
         container_name: esp-app-market
-        image: thingpulse/esp-app-market:1.0.8
+        image: thingpulse/esp-app-market:1.0.9
         restart: always
         ports:
             - 8081:80
