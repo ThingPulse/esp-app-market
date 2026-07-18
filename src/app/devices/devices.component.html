@@ -1,33 +1,53 @@
-<h1>Devices</h1>
-<mat-form-field class="example-form-field">
-  <mat-label>Search Devices</mat-label>
-  <input matInput type="text" [(ngModel)]="searchText">
-</mat-form-field>
+<section class="hero">
+  <div>
+    <p class="eyebrow">Web-based firmware installer</p>
+    <h1 class="page-title">Your board.<br><span>New possibilities.</span></h1>
+    <p class="page-intro">Discover compatible firmware and install it directly from your browser. No toolchains, drivers, or command line required.</p>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="signal signal-one"></div>
+    <div class="signal signal-two"></div>
+    <div class="chip">
+      <span class="chip-label">ESP</span>
+      <mat-icon>memory</mat-icon>
+      <i *ngFor="let pin of [1,2,3,4,5,6,7,8]" [style.--pin]="pin"></i>
+    </div>
+  </div>
+</section>
 
-<mat-card *ngFor="let device of devices | fullTextFilter: searchText">
-    <mat-card-header>
-      <img mat-card-avatar [src]="device.imageThumbnail"  alt="Device"/>
-      <mat-card-title>{{device.name}}</mat-card-title>
-      <mat-card-subtitle>{{device.manufacturer}}</mat-card-subtitle>
+<section>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Hardware catalog</p>
+      <h2>Choose your device</h2>
+    </div>
+    <mat-form-field class="search-field" appearance="outline" subscriptSizing="dynamic">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label>Search devices</mat-label>
+      <input matInput type="search" [(ngModel)]="searchText">
+    </mat-form-field>
+  </div>
 
-    </mat-card-header>
-    <mat-card-header>
-      <mat-card-title-group>
-        <img mat-card-sm-image [src]="device?.image"  alt="Device"/>
-        <mat-card-title>{{device?.name}}</mat-card-title>
-        <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
-      </mat-card-title-group>
-    </mat-card-header>
-    
-    <mat-card-content>
-      <p>
-        <mat-chip *ngFor="let tag of device?.tags">{{tag}}</mat-chip>
-      </p>
-      <p>
-        {{device.description}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button [routerLink]="['/device', device.id]">Apps</button>
-      </mat-card-actions>
-</mat-card>
+  <div class="device-grid">
+    <article class="device-card" *ngFor="let device of devices | fullTextFilter: searchText">
+      <a class="device-image" [routerLink]="['/device', device.id]">
+        <img [src]="device.image" [alt]="device.name">
+        <span class="compatibility"><i></i> Web flash ready</span>
+      </a>
+      <div class="device-content">
+        <div class="device-meta">
+          <span>{{device.manufacturer}}</span>
+          <span>{{device.mcuFamily}}</span>
+        </div>
+        <h3>{{device.name}}</h3>
+        <p>{{device.description}}</p>
+        <div class="tag-list">
+          <span class="tag" *ngFor="let tag of device.tags | slice:0:4">{{tag}}</span>
+        </div>
+        <a mat-raised-button class="primary-action card-action" [routerLink]="['/device', device.id]">
+          Browse firmware <mat-icon>arrow_forward</mat-icon>
+        </a>
+      </div>
+    </article>
+  </div>
+</section>

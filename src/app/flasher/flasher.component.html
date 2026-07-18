@@ -1,74 +1,99 @@
-<p>
-  <a [routerLink]="['/device', device?.id]">Back to App Overview</a>
-</p>
+<a class="back-link" [routerLink]="['/device', device?.id]"><mat-icon>arrow_back</mat-icon> Back to firmware</a>
 
-<mat-card>
-    <mat-card-header>
-      <img mat-card-avatar [src]="app?.appIcon" alt="Device"/>
-      <mat-card-title>{{app?.name}}</mat-card-title>
-      <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>
-          <mat-chip *ngFor="let tag of app?.tags">{{tag}}</mat-chip>
-        </p>
-        <p>
-          {{app?.description}}
-        </p>
-        <p>
-          Source: <a [href]="app?.repository" target="_blank">{{app?.repository}}</a>
-        </p>
-        {{app?.instructions}}
+<header class="install-header">
+  <div class="app-identity">
+    <div class="app-icon"><img [src]="app?.appIcon" [alt]="app?.name"></div>
+    <div>
+      <p class="eyebrow">Firmware installer</p>
+      <h1>{{app?.name}}</h1>
+      <p>for {{device?.name}}</p>
+    </div>
+  </div>
+  <div class="connection-pill" [class.connected]="isConnected()">
+    <i></i>
+    {{isConnected() ? 'Device connected' : 'Ready to connect'}}
+  </div>
+</header>
 
+<div class="install-layout">
+  <section class="firmware-panel">
+    <div class="panel-heading">
+      <span class="step-number">01</span>
+      <div>
+        <h2>Review firmware</h2>
+        <p>Confirm the release and details before installing.</p>
+      </div>
+    </div>
 
-        <div *ngIf="!progresses[0]">{{flasherConsole}}</div>
-        <div *ngFor="let partition of selectedVersion?.partitions; index as i;" >
-            <div *ngIf="progresses[i]?.progress">
-            {{ partition.name }} {{progresses[i].progress}}%
-            <mat-progress-bar  mode="determinate" [value]="progresses[i].progress"></mat-progress-bar>
-            </div>
-        </div>
+    <div class="firmware-summary">
+      <div class="summary-row">
+        <span>Release</span>
+        <strong>{{selectedVersion?.name || app?.version}}</strong>
+      </div>
+      <div class="summary-row">
+        <span>Target</span>
+        <strong>{{device?.mcuFamily}}</strong>
+      </div>
+      <div class="summary-row">
+        <span>Partitions</span>
+        <strong>{{selectedVersion?.partitions?.length || 0}}</strong>
+      </div>
+    </div>
 
-  
-        <div class="card" *ngIf="false">
-          <button mat-mat-raised-button color="primary" (click)="connect()">Connect</button>
-          <button mat-mat-raised-button (click)="close()" [disabled]="!isConnected()">Close</button>
-          <button mat-mat-raised-button (click)="startMonitor()" [disabled]="!isConnected() || isMonitoring()">Start Monitor</button>
-          <button mat-mat-raised-button (click)="stopMonitor()" [disabled]="!isConnected()  || !isMonitoring()">Stop Monitor</button>
-          <button mat-mat-raised-button (click)="reset()" [disabled]="!isConnected()">Reset</button>
-          <button mat-mat-raised-button (click)="flash()" [disabled]="!isConnected() || isMonitoring()">Flash</button>
-        </div>
-    </mat-card-content>
-    <mat-card-actions align="end">
-        <div class="flex-row">
-            <div *ngIf="isConnected()">              
-                <span><mat-icon>phonelink</mat-icon> Connected</span>
-            </div>
-            <div *ngIf="!isConnected()">
-                <span><mat-icon>phonelink_off</mat-icon> Disconnected</span>
-            </div>
-        </div>
-        <div>
-          <button mat-raised-button color="primary" (click)="flash()">Flash App</button>
-          <div>
-            <mat-checkbox [(ngModel)]="eraseAll" (change)="trackEraseCompleteFlash($event.checked)">Erase complete flash before writing</mat-checkbox>
-          </div>
-        </div>
-  
-    </mat-card-actions>
-  </mat-card>
+    <p class="description">{{app?.description}}</p>
+    <p class="instructions" *ngIf="app?.instructions"><mat-icon>info</mat-icon>{{app?.instructions}}</p>
 
-  <mat-expansion-panel expanded="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
+    <div class="tag-list">
+      <span class="tag" *ngFor="let tag of app?.tags">{{tag}}</span>
+    </div>
 
-        Serial Console Output
+    <a class="repository-link" [href]="app?.repository" target="_blank" rel="noopener">
+      <mat-icon>code</mat-icon> View source repository <mat-icon>open_in_new</mat-icon>
+    </a>
+  </section>
 
-      </mat-panel-title>
-      <mat-panel-description>
-          Messages: {{messageCount}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <textarea class="serial-console"  #console [scrollTop]="console.scrollHeight" [(ngModel)]='messageArea' rows="20" cols="90%">                             
-    </textarea>
-  </mat-expansion-panel>
+  <aside class="action-panel">
+    <div class="panel-heading compact">
+      <span class="step-number">02</span>
+      <div>
+        <h2>Install to device</h2>
+        <p>Connect via USB when prompted.</p>
+      </div>
+    </div>
+
+    <div class="browser-note">
+      <mat-icon>usb</mat-icon>
+      <div><strong>Use a data-capable USB cable</strong><span>Your browser will ask you to select a serial port.</span></div>
+    </div>
+
+    <mat-checkbox class="erase-option" [(ngModel)]="eraseAll" (change)="trackEraseCompleteFlash($event.checked)">
+      <span>Erase complete flash</span>
+      <small>Recommended when switching firmware families</small>
+    </mat-checkbox>
+
+    <button mat-raised-button class="primary-action flash-button" (click)="flash()" [disabled]="isMonitoring()">
+      <mat-icon>bolt</mat-icon> Connect &amp; install
+    </button>
+
+    <p class="safety-note"><mat-icon>verified_user</mat-icon> Installation runs locally in your browser.</p>
+  </aside>
+</div>
+
+<section class="progress-panel" *ngIf="flasherConsole || progresses[0]">
+  <div class="progress-heading">
+    <div><span class="live-dot"></span><strong>Installation progress</strong></div>
+    <span>{{flasherConsole}}</span>
+  </div>
+  <div class="partition-progress" *ngFor="let partition of selectedVersion?.partitions; index as i">
+    <div><span>{{partition.name}}</span><strong>{{progressAt(i)}}%</strong></div>
+    <mat-progress-bar mode="determinate" [value]="progressAt(i)"></mat-progress-bar>
+  </div>
+</section>
+
+<mat-expansion-panel class="console-panel">
+  <mat-expansion-panel-header>
+    <mat-panel-title><mat-icon>terminal</mat-icon> Serial console</mat-panel-title>
+    <mat-panel-description>{{messageCount}} messages</mat-panel-description>
+  </mat-expansion-panel-header>
+  <textarea class="serial-console" #console [scrollTop]="console.scrollHeight" [(ngModel)]="messageArea" rows="16" aria-label="Serial console output"></textarea>
+</mat-expansion-panel>

@@ -1,52 +1,54 @@
+<a class="back-link" routerLink="/"><mat-icon>arrow_back</mat-icon> All devices</a>
 
-<p>
-  <a routerLink="/">Back to Device Overview</a>
-</p>
-<mat-card class="device-card">
-    <mat-card-header>
-      <mat-card-title-group>
-        <img mat-card-sm-image [src]="device?.image"  alt="Device"/>
-        <mat-card-title>{{device?.name}}</mat-card-title>
-        <mat-card-subtitle>{{device?.manufacturer}}</mat-card-subtitle>
-      </mat-card-title-group>
-    </mat-card-header>
-    <mat-card-content>
-      <p>
-        <mat-chip *ngFor="let tag of device?.tags">{{tag}}</mat-chip>
-      </p>
-      <p>
-        {{device?.description}}
-      </p>
-      <p>Learn more about the <a [href]="device?.productLink" target="_blank">{{device?.name}}</a></p>
-    </mat-card-content>
-</mat-card>
+<section class="device-hero">
+  <div class="device-hero-image">
+    <img [src]="device?.image" [alt]="device?.name">
+  </div>
+  <div class="device-hero-content">
+    <p class="eyebrow">{{device?.manufacturer}} · {{device?.mcuFamily}}</p>
+    <h1>{{device?.name}}</h1>
+    <p>{{device?.description}}</p>
+    <div class="tag-list">
+      <span class="tag" *ngFor="let tag of device?.tags">{{tag}}</span>
+    </div>
+    <a class="product-link" [href]="device?.productLink" target="_blank" rel="noopener">
+      View hardware details <mat-icon>open_in_new</mat-icon>
+    </a>
+  </div>
+</section>
 
+<section>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Compatible releases</p>
+      <h2>Firmware for {{device?.name}}</h2>
+    </div>
+    <mat-form-field class="search-field" appearance="outline" subscriptSizing="dynamic">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label>Search firmware</mat-label>
+      <input matInput type="search" [(ngModel)]="searchText">
+    </mat-form-field>
+  </div>
 
-<h1>Applications</h1>
-<mat-form-field class="example-form-field">
-  <mat-label>Search Applications</mat-label>
-  <input matInput type="text" [(ngModel)]="searchText">
-</mat-form-field>
-
-<mat-card *ngFor="let app of apps | fullTextFilter: searchText">
-  <mat-card-header>
-    <img mat-card-avatar [src]="app.appIcon" alt="Device"/>
-    <mat-card-title>{{app.name}}</mat-card-title>
-    <mat-card-subtitle>{{app?.version}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      <mat-chip *ngFor="let tag of app?.tags">{{tag}}</mat-chip>
-    </p>
-    <p>
-      {{app?.description}}
-    </p>
-    <p>
-      Source: <a [href]="app?.repository" target="_blank">{{app?.repository}}</a>
-    </p>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary" [routerLink]="['/device', device?.id, 'app', app.id]">Flash App</button>
-
-  </mat-card-actions>
-</mat-card>
+  <div class="app-grid">
+    <article class="app-card" *ngFor="let app of apps | fullTextFilter: searchText">
+      <div class="app-topline">
+        <div class="app-icon"><img [src]="app.appIcon" [alt]="app.name"></div>
+        <span class="version-badge">{{app.version || 'Latest'}}</span>
+      </div>
+      <h3>{{app.name}}</h3>
+      <p>{{app.description}}</p>
+      <div class="tag-list">
+        <span class="tag" *ngFor="let tag of app.tags | slice:0:4">{{tag}}</span>
+      </div>
+      <div class="app-footer">
+        <a class="source-link" [href]="app.repository" target="_blank" rel="noopener" matTooltip="View source">
+          <mat-icon>code</mat-icon>
+        </a>
+        <a mat-raised-button class="primary-action" [routerLink]="['/device', device?.id, 'app', app.id]">
+          Install <mat-icon>bolt</mat-icon>
+        </a>
+      </div>
+    </article>
+  </div>
+</section>

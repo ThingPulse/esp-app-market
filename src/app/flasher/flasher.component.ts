@@ -119,6 +119,10 @@ export class FlasherComponent  implements OnInit{
     this.portService.resetDevice();
   }
 
+  progressAt(index: number): number {
+    return this.progresses[index]?.progress ?? 0;
+  }
+
   trackEraseCompleteFlash(enabled: boolean) {
     if (enabled) {
       this.trackClarityEvent('Erase complete flash before writing');

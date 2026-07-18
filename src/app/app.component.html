@@ -1,21 +1,28 @@
-<mat-toolbar class="mat-elevation-z6 flex-toolbar" color="primary">
-  
-    <button mat-raised-button color="primary" [routerLink]="['/']">
-    <mat-icon>home</mat-icon> Home</button>
-    <span>ESP App Market</span>
-    <a href="https://github.com/ThingPulse/" target="_blank"><span><mat-icon>share</mat-icon> Github</span></a>
-    
-    
-</mat-toolbar>
-<div class="container">
-  <router-outlet></router-outlet>
+<div class="app-shell">
+  <header class="site-header">
+    <a class="brand" routerLink="/" aria-label="ESP App Market home">
+      <span class="brand-mark"><mat-icon>memory</mat-icon></span>
+      <span>
+        <strong>ESP App Market</strong>
+        <small>Firmware, ready to flash</small>
+      </span>
+    </a>
+
+    <nav class="header-actions" aria-label="Main navigation">
+      <a mat-button routerLink="/"><mat-icon>grid_view</mat-icon> Devices</a>
+      <a mat-stroked-button href="https://github.com/ThingPulse/" target="_blank" rel="noopener">
+        <mat-icon>code</mat-icon> GitHub
+      </a>
+    </nav>
+  </header>
+
+  <main class="page-container">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand"><mat-icon>memory</mat-icon> ESP App Market</div>
+    <span>Open firmware tools by <a href="https://www.thingpulse.com" target="_blank" rel="noopener">ThingPulse</a></span>
+    <span class="build-info" [matTooltip]="environment?.buildDate || ''">v1.0.1 · {{getCurrentYear()}}</span>
+  </footer>
 </div>
-<footer class="flex-footer">
-    <span>
-        {{getCurrentYear()}} By <a href="https://www.thingpulse.com">ThingPulse</a> 
-        <div class="tooltip"> &nbsp;1.0.1
-          <span class="tooltiptext">{{environment?.buildDate}}</span>
-        </div>
-    
-    </span>
-</footer>

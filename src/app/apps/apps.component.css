@@ -1,14 +1,155 @@
-.mdc-card {
-    margin-bottom: 10px;
+.device-hero {
+  min-height: 350px;
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(18, 33, 58, .98), rgba(9, 21, 38, .98));
 }
 
-.device-card {
-    background-color:#f5f5f5;
-    margin-bottom: 30px;
+.device-hero-image {
+  min-height: 350px;
+  overflow: hidden;
+  background: #e2e8f0;
 }
 
-mat-chip {
-    padding: 0px 0px !important;
-    margin: 0px 2px !important;
-    font-size: smaller;
+.device-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.device-hero-content {
+  padding: clamp(32px, 6vw, 64px);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.device-hero-content h1 {
+  margin: 0 0 15px;
+  font-size: clamp(34px, 5vw, 52px);
+  letter-spacing: -.045em;
+}
+
+.device-hero-content > p:not(.eyebrow) {
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.product-link mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.app-card {
+  min-height: 350px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(13, 25, 44, .88);
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+
+.app-card:hover {
+  border-color: rgba(34, 211, 238, .32);
+  background: rgba(18, 33, 58, .96);
+  transform: translateY(-4px);
+}
+
+.app-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.app-icon {
+  width: 62px;
+  height: 62px;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, .18);
+  border-radius: 17px;
+  background: #fff;
+}
+
+.app-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 9px;
+}
+
+.version-badge {
+  padding: 6px 9px;
+  color: #86efac;
+  font-size: 10px;
+  font-weight: 700;
+  border: 1px solid rgba(74, 222, 128, .18);
+  border-radius: 8px;
+  background: rgba(74, 222, 128, .06);
+}
+
+.app-card h3 {
+  margin: 22px 0 9px;
+  font-size: 21px;
+  letter-spacing: -.025em;
+}
+
+.app-card > p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.app-footer {
+  margin-top: auto;
+  padding-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.source-link {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #94a3b8;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+@media (max-width: 920px) {
+  .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .device-hero { grid-template-columns: 1fr; }
+  .device-hero-image { min-height: 230px; max-height: 280px; }
+  .app-grid { grid-template-columns: 1fr; }
 }
