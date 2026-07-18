@@ -51,7 +51,7 @@
         <div>
           <button mat-raised-button color="primary" (click)="flash()">Flash App</button>
           <div>
-            <mat-checkbox [(ngModel)]="eraseAll">Erase complete flash before writing</mat-checkbox>
+            <mat-checkbox [(ngModel)]="eraseAll" (change)="trackEraseCompleteFlash($event.checked)">Erase complete flash before writing</mat-checkbox>
           </div>
         </div>
   

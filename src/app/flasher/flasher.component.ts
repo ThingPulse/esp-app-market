@@ -119,7 +119,14 @@ export class FlasherComponent  implements OnInit{
     this.portService.resetDevice();
   }
 
+  trackEraseCompleteFlash(enabled: boolean) {
+    if (enabled) {
+      this.trackClarityEvent('Erase complete flash before writing');
+    }
+  }
+
   async flash() {
+    this.trackClarityEvent('Flash App');
     console.log("Flashing");
     this.resetState();
     if (this.app && this.selectedVersion?.partitions) {
@@ -137,6 +144,14 @@ export class FlasherComponent  implements OnInit{
       console.log("No app selected");
     }
     
+  }
+
+  private trackClarityEvent(eventName: string) {
+    const clarity = (window as Window & {
+      clarity?: (command: string, value: string) => void
+    }).clarity;
+
+    clarity?.('event', eventName);
   }
 
 }
