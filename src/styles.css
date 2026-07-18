@@ -7,6 +7,25 @@
   --muted: #94a3b8;
   --cyan: #22d3ee;
   --green: #4ade80;
+  --accent-text: #a5f3fc;
+  --success-text: #86efac;
+  --header: rgba(7, 15, 30, .86);
+  color-scheme: dark;
+}
+
+html[data-theme='light'] {
+  --bg: #f5f8fc;
+  --surface: #ffffff;
+  --surface-raised: #eef4fb;
+  --line: rgba(51, 65, 85, .16);
+  --text: #102033;
+  --muted: #5f7085;
+  --cyan: #087f9c;
+  --green: #15803d;
+  --accent-text: #075d73;
+  --success-text: #166534;
+  --header: rgba(255, 255, 255, .9);
+  color-scheme: light;
 }
 
 html,
@@ -90,8 +109,19 @@ a {
 }
 
 .search-field .mat-mdc-text-field-wrapper {
-  background: rgba(15, 29, 50, .92) !important;
+  background: var(--surface-raised) !important;
   border-radius: 14px !important;
+}
+
+.search-field input.mat-mdc-input-element {
+  color: var(--text) !important;
+  caret-color: var(--cyan) !important;
+}
+
+.search-field input.mat-mdc-input-element::placeholder,
+.search-field .mat-mdc-floating-label,
+.search-field .mat-mdc-form-field-icon-prefix {
+  color: var(--muted) !important;
 }
 
 .search-field .mat-mdc-form-field-focus-overlay {
@@ -112,7 +142,7 @@ a {
 
 .tag {
   padding: 6px 10px;
-  color: #a5f3fc;
+  color: var(--accent-text);
   font-size: 11px;
   font-weight: 600;
   line-height: 1;
@@ -164,6 +194,93 @@ a {
 .console-panel .mat-expansion-indicator::after {
   color: #94a3b8 !important;
   border-color: currentColor !important;
+}
+
+html[data-theme='light'] body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(14, 165, 233, .1), transparent 28rem),
+    radial-gradient(circle at 90% 25%, rgba(34, 197, 94, .06), transparent 24rem),
+    var(--bg);
+}
+
+html[data-theme='light'] .device-card,
+html[data-theme='light'] .app-card,
+html[data-theme='light'] .device-hero,
+html[data-theme='light'] .firmware-panel,
+html[data-theme='light'] .action-panel,
+html[data-theme='light'] .progress-panel,
+html[data-theme='light'] .console-panel,
+html[data-theme='light'] .connect-panel,
+html[data-theme='light'] .report-header,
+html[data-theme='light'] .diagnostic-card {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface) !important;
+  box-shadow: 0 16px 40px rgba(30, 64, 95, .07);
+}
+
+html[data-theme='light'] .device-content h3,
+html[data-theme='light'] .app-card h3,
+html[data-theme='light'] .device-hero-content h1,
+html[data-theme='light'] .app-identity h1,
+html[data-theme='light'] .panel-heading h2,
+html[data-theme='light'] .connect-copy h2,
+html[data-theme='light'] .report-header h2,
+html[data-theme='light'] .card-heading,
+html[data-theme='light'] dd,
+html[data-theme='light'] .erase-option span,
+html[data-theme='light'] .browser-note strong {
+  color: var(--text);
+}
+
+html[data-theme='light'] .device-content > p,
+html[data-theme='light'] .app-card > p,
+html[data-theme='light'] .device-hero-content > p:not(.eyebrow),
+html[data-theme='light'] .description,
+html[data-theme='light'] .panel-heading p,
+html[data-theme='light'] .connect-copy p,
+html[data-theme='light'] .page-intro {
+  color: var(--muted);
+}
+
+html[data-theme='light'] .tag {
+  color: #075d73;
+  border-color: rgba(8, 127, 156, .2);
+  background: rgba(8, 127, 156, .07);
+}
+
+html[data-theme='light'] .back-link,
+html[data-theme='light'] .product-link,
+html[data-theme='light'] .repository-link,
+html[data-theme='light'] .source-link {
+  color: #334155;
+}
+
+html[data-theme='light'] .firmware-summary,
+html[data-theme='light'] .feature-list span {
+  background: #f7fafc;
+}
+
+html[data-theme='light'] .console-panel .mat-expansion-panel-header,
+html[data-theme='light'] .console-panel .mat-expansion-panel-header-title {
+  color: var(--text) !important;
+}
+
+html[data-theme='light'] .console-panel .mat-expansion-panel-header-description,
+html[data-theme='light'] .console-panel .mat-expansion-indicator::after {
+  color: var(--muted) !important;
+}
+
+html[data-theme='light'] .erase-option .mdc-label span {
+  color: var(--text) !important;
+}
+
+html[data-theme='light'] .erase-option .mdc-label small {
+  color: var(--muted) !important;
+}
+
+html[data-theme='light'] .privacy-note strong {
+  color: #166534;
 }
 
 @media (max-width: 700px) {

@@ -18,8 +18,8 @@
   gap: 24px;
   position: relative;
   z-index: 20;
-  background: rgba(7, 15, 30, .86);
-  border-bottom: 1px solid rgba(148, 163, 184, .14);
+  background: var(--header);
+  border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
 }
 
@@ -27,7 +27,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: #f8fafc;
+  color: var(--text);
   text-decoration: none;
 }
 
@@ -54,7 +54,7 @@
 
 .brand small {
   margin-top: 2px;
-  color: #94a3b8;
+  color: var(--muted);
   font-size: 11px;
   letter-spacing: .04em;
 }
@@ -66,7 +66,12 @@
 }
 
 .header-actions a {
-  color: #dbeafe;
+  color: var(--text);
+}
+
+.theme-toggle {
+  color: var(--text);
+  border: 1px solid var(--line);
 }
 
 .page-container {
@@ -82,20 +87,20 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  color: #64748b;
+  color: var(--muted);
   font-size: 13px;
   border-top: 1px solid rgba(148, 163, 184, .12);
 }
 
 .site-footer a {
-  color: #94a3b8;
+  color: var(--muted);
 }
 
 .footer-brand {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #cbd5e1;
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -117,7 +122,7 @@
 
   .brand small,
   .header-actions a:first-child,
-  .header-actions a:last-child mat-icon {
+  .header-actions a:last-child {
     display: none;
   }
 

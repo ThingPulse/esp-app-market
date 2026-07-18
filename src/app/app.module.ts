@@ -38,7 +38,10 @@ const routes: Routes = [
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled'
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true },

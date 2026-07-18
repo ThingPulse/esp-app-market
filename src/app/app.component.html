@@ -11,6 +11,11 @@
     <nav class="header-actions" aria-label="Main navigation">
       <a mat-button routerLink="/"><mat-icon>grid_view</mat-icon> Devices</a>
       <a mat-button routerLink="/diagnostics"><mat-icon>troubleshoot</mat-icon> Diagnostics</a>
+      <button mat-icon-button class="theme-toggle" (click)="toggleTheme()"
+              [attr.aria-label]="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+              [matTooltip]="theme === 'dark' ? 'Light mode' : 'Dark mode'">
+        <mat-icon>{{theme === 'dark' ? 'light_mode' : 'dark_mode'}}</mat-icon>
+      </button>
       <a mat-stroked-button href="https://github.com/ThingPulse/" target="_blank" rel="noopener">
         <mat-icon>code</mat-icon> GitHub
       </a>

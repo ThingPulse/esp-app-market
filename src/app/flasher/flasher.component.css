@@ -48,7 +48,7 @@
   background: #64748b;
 }
 
-.connection-pill.connected { color: #bbf7d0; border-color: rgba(74, 222, 128, .25); }
+.connection-pill.connected { color: var(--success-text); border-color: rgba(74, 222, 128, .25); }
 .connection-pill.connected i { background: #4ade80; box-shadow: 0 0 10px #4ade80; }
 
 .install-layout {
@@ -149,8 +149,8 @@
 }
 
 .erase-option span, .erase-option small { display: block; }
-.erase-option span { color: #e2e8f0; font-size: 13px; font-weight: 600; }
-.erase-option small { margin-top: 2px; color: #64748b; font-size: 10px; }
+.erase-option span { color: var(--text); font-size: 13px; font-weight: 600; }
+.erase-option small { margin-top: 2px; color: var(--muted); font-size: 10px; }
 
 .flash-button { width: 100%; min-height: 50px !important; }
 .safety-note { margin: 14px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; color: #64748b; font-size: 10px; }
@@ -159,7 +159,7 @@
 .progress-panel { margin-top: 20px; }
 .progress-heading, .progress-heading > div, .partition-progress > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .progress-heading { margin-bottom: 22px; color: var(--muted); font-size: 12px; }
-.progress-heading strong { color: #e2e8f0; }
+.progress-heading strong { color: var(--text); }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
 .partition-progress { margin-top: 15px; }
 .partition-progress > div { margin-bottom: 7px; font-size: 11px; }

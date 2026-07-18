@@ -104,7 +104,7 @@
 
 .version-badge {
   padding: 6px 9px;
-  color: #86efac;
+  color: var(--success-text);
   font-size: 10px;
   font-weight: 700;
   border: 1px solid rgba(74, 222, 128, .18);

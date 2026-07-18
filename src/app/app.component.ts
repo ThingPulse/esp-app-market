@@ -12,10 +12,12 @@ import { Environment } from './models/environment';
 export class AppComponent implements OnInit  {
 
   environment: Environment | undefined = undefined
+  theme: 'dark' | 'light' = 'dark';
 
   constructor(public environmentService: EnvironmentService) { }
 
   ngOnInit(): void {
+    this.theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
     this.environmentService.getEnvironment().subscribe((environment) => {
       this.environment = environment;
     });
@@ -25,7 +27,12 @@ export class AppComponent implements OnInit  {
     return new Date().getFullYear();
   }
 
+  toggleTheme(): void {
+    this.theme = this.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', this.theme);
+    localStorage.setItem('esp-app-market-theme', this.theme);
+  }
+
 
 }
-
 
