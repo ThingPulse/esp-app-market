@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "id": "tp-icon-256-test-app",
+    "name": "Icon256 Test App",
+    "description": "Interactive LED and button test for the Icon256.",
+    "instructions": "Connect the Icon256 directly over USB.",
+    "repository": "https://github.com/ThingPulse/icon256-testbed",
+    "supportedDevices": ["tp-icon-256"],
+    "tags": ["test", "led-matrix", "icon256"],
+    "icon": {
+      "asset": "icon256-test-app.png"
+    }
+  },
+  "release": {
+    "version": "1.1.0",
+    "notes": "Adds an improved button test.",
+    "partitions": [
+      {
+        "name": "Firmware",
+        "asset": "icon256-test-app.bin",
+        "offset": "0x0",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ]
+  }
+}

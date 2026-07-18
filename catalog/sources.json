@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "tp-pendrive-s3-super-wifi-duck",
+      "repository": "ThingPulse/SuperWiFiDuck",
+      "enabled": true,
+      "manifestAsset": "app-market.json",
+      "retainVersions": 3,
+      "retainSnapshots": 3
+    }
+  ]
+}

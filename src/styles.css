@@ -134,6 +134,17 @@ a {
   border-color: var(--line) !important;
 }
 
+.version-picker .mat-mdc-text-field-wrapper {
+  background: var(--surface-raised) !important;
+  border-radius: 12px !important;
+}
+
+.version-picker .mat-mdc-select-value,
+.version-picker .mat-mdc-select-arrow,
+.version-picker .mat-mdc-floating-label {
+  color: var(--text) !important;
+}
+
 .tag-list {
   display: flex;
   flex-wrap: wrap;

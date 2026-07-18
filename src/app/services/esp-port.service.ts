@@ -289,7 +289,7 @@ export class EspPortService {
         const fileArray = [];
         //const progressBars = [];
         for (let i = 0; i < partitions.length; i++) {
-          fileArray.push({ data: partitions[i].data, address: partitions[i].offset });
+          fileArray.push({ data: partitions[i].data, address: Number(partitions[i].offset) });
         }
         try {
           const flashOptions: FlashOptions = {

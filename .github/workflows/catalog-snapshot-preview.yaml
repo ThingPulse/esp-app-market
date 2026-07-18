@@ -1,0 +1,38 @@
+name: Build firmware snapshot preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test catalog generator
+        run: npm run catalog:test
+
+      - name: Build catalog with prerelease snapshots
+        run: npm run build:snapshots
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload preview site
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp-app-market-snapshot-preview
+          path: dist/esp-app-market
+          retention-days: 7

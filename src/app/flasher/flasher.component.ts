@@ -47,7 +47,8 @@ export class FlasherComponent  implements OnInit{
     console.log(this.device);
     this.appService.findById(this.appId).subscribe((app) => {
       this.app = app;
-      this.selectedVersion = this.app?.versions[0];
+      this.selectedVersion = this.app?.versions.find(version => version.channel !== 'snapshot')
+        || this.app?.versions[0];
     });
     const portStateStreamSubscription = this.portService.portStateStream.subscribe(isConnected => {
       console.log("isConnected: ", isConnected);
@@ -117,6 +118,11 @@ export class FlasherComponent  implements OnInit{
 
   reset() {
     this.portService.resetDevice();
+  }
+
+  onVersionChange(): void {
+    this.flasherConsole = '';
+    this.progresses = new Array(this.selectedVersion?.partitions.length);
   }
 
   progressAt(index: number): number {

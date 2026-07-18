@@ -1,4 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 async function openCatalog(page: Page): Promise<void> {
   await page.route('https://www.clarity.ms/**', route => route.abort());
@@ -80,4 +82,23 @@ test('light mode is readable and persists', async ({ page }) => {
   await expect(page.getByText('Local and read-only')).toHaveCSS('color', 'rgb(22, 101, 52)');
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
   await expect(page).toHaveScreenshot('diagnostics-light.png', { fullPage: true });
+});
+
+test('snapshot release can be selected before flashing', async ({ page }) => {
+  const catalog = JSON.parse(readFileSync(resolve('src/assets/apps.json'), 'utf8'));
+  const app = catalog.find((candidate: { id: string }) => candidate.id === 'tp-pendrive-s3-super-wifi-duck');
+  app.versions.push({
+    ...app.versions[0],
+    name: '1.2.0-rc.1',
+    channel: 'snapshot'
+  });
+  app.versions[0].channel = 'stable';
+
+  await page.route('**/assets/apps.json*', route => route.fulfill({ json: catalog }));
+  await openFirstDevice(page);
+  await page.locator('.app-card').first().getByRole('link', { name: /Install/i }).click();
+  await page.getByLabel('Firmware version').click();
+  await page.getByRole('option', { name: /1.2.0-rc.1 · Snapshot/ }).click();
+  await expect(page.getByText('Snapshot firmware')).toBeVisible();
+  await expect(page.getByText('This is a prerelease build intended for testing.')).toBeVisible();
 });

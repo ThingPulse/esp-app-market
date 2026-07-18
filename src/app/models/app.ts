@@ -12,4 +12,8 @@ export interface App {
     supportedDevices: string[];
     versions: AppVersion[];
     tags: string[];
+    source?: {
+        type: 'bundled' | 'github-release';
+        repository?: string;
+    };
 }

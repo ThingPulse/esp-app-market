@@ -1,0 +1,53 @@
+name: Sync firmware catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test catalog generator
+        run: npm run catalog:test
+
+      - name: Synchronize stable releases
+        run: npm run catalog:sync
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Build application
+        run: ./node_modules/.bin/ng build
+
+      - name: Create catalog update pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automation/firmware-catalog
+          delete-branch: true
+          commit-message: "chore: update firmware catalog"
+          title: "chore: update firmware catalog"
+          body: |
+            Automated update from published GitHub Releases.
+
+            Release manifests, asset checksums, device references, partition layouts,
+            the catalog generator tests, and the Angular production build have passed.
+          add-paths: |
+            src/assets/apps.json
+            src/assets/generated/**

@@ -40,6 +40,20 @@
       </div>
     </div>
 
+    <mat-form-field class="version-picker" appearance="outline" *ngIf="app && app.versions.length > 1">
+      <mat-label>Firmware version</mat-label>
+      <mat-select [(ngModel)]="selectedVersion" (selectionChange)="onVersionChange()">
+        <mat-option *ngFor="let version of app.versions" [value]="version">
+          {{version.name}}{{version.channel === 'snapshot' ? ' · Snapshot' : ''}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="snapshot-warning" *ngIf="selectedVersion?.channel === 'snapshot'">
+      <mat-icon>science</mat-icon>
+      <div><strong>Snapshot firmware</strong><span>This is a prerelease build intended for testing.</span></div>
+    </div>
+
     <p class="description">{{app?.description}}</p>
     <p class="instructions" *ngIf="app?.instructions"><mat-icon>info</mat-icon>{{app?.instructions}}</p>
 

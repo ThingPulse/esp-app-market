@@ -109,6 +109,25 @@
 .summary-row span { margin-bottom: 5px; color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
 .summary-row strong { font-size: 13px; }
 
+.version-picker { width: 100%; margin-bottom: 18px; }
+
+.snapshot-warning {
+  margin-bottom: 20px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, .28);
+  border-radius: 12px;
+  background: rgba(245, 158, 11, .08);
+}
+
+.snapshot-warning strong,
+.snapshot-warning span { display: block; }
+.snapshot-warning strong { font-size: 12px; }
+.snapshot-warning span { margin-top: 3px; color: var(--muted); font-size: 10px; }
+
 .description { color: var(--muted); line-height: 1.7; }
 .instructions { display: flex; gap: 8px; color: #cbd5e1; font-size: 13px; }
 .instructions mat-icon { color: var(--cyan); font-size: 18px; }
