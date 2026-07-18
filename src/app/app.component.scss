@@ -16,8 +16,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 20;
   background: rgba(7, 15, 30, .86);
   border-bottom: 1px solid rgba(148, 163, 184, .14);
