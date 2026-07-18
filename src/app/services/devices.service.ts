@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Device } from '../models/device';
 import { Observable, map, of } from 'rxjs';
+import { cacheBustingParams } from './cache-busting';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class DevicesService {
 
 
   getDevices(): Observable<Device[]> {
-    return this.httpClient.get<Device[]>('/assets/devices.json');
+    return this.httpClient.get<Device[]>('/assets/devices.json', {
+      params: cacheBustingParams()
+    });
   }
 
 

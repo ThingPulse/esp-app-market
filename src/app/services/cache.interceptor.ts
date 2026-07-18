@@ -14,7 +14,7 @@ export class CacheInterceptor implements HttpInterceptor {
     }
 
     // Check if the request is in the cache
-    const cachedResponse = this.cache.get(req.url);
+    const cachedResponse = this.cache.get(req.urlWithParams);
     if (cachedResponse) {
       return of(cachedResponse.clone());
     }
@@ -23,7 +23,7 @@ export class CacheInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {
-          this.cache.set(req.url, event.clone());
+          this.cache.set(req.urlWithParams, event.clone());
         }
       })
     );

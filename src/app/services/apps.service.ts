@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { App } from '../models/app';
 import { Observable, map } from 'rxjs';
+import { cacheBustingParams } from './cache-busting';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class AppsService {
   }
 
   getApps(): Observable<App[]> {
-    return this.httpClient.get<App[]>('/assets/apps.json');
+    return this.httpClient.get<App[]>('/assets/apps.json', {
+      params: cacheBustingParams()
+    });
   }
 
   findByDeviceId(deviceId: string): Observable<App[]> {

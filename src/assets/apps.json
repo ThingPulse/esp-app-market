@@ -3,7 +3,7 @@
         "id": "tp-pendrive-s3-super-wifi-duck",
         "name": "Super Wifi Duck",
         "description": "BadUsb/ Keystroke Injection/ Wifi Duck",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "repository": "https://github.com/ThingPulse/SuperWiFiDuck",
         "appIcon": "/assets/apps/super-wifi-duck/super-wifi-duck.png",
         "supportedDevices": [
