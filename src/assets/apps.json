@@ -132,44 +132,65 @@
   },
   {
     "id": "tp-pendrive-s3-wifi-dongle",
-    "name": "WiFi Dongle",
-    "description": "Turns the Pendrive S3 into a WiFi dongle so that your computer can connect to the internet.",
+    "name": "SuperWifiDuck",
+    "description": "USB Wi-Fi dongle firmware for the ThingPulse ESP32-S3 Pendrive.",
     "instructions": "",
-    "version": "1.0.0",
+    "version": "1.2.0-rc.2",
     "repository": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle",
-    "appIcon": "/assets/apps/wifi-dongle/wifi-dongle.png",
+    "appIcon": "/assets/generated/tp-pendrive-s3-wifi-dongle/ESP32-S3.png",
     "supportedDevices": [
       "tp-pendrive-s3"
     ],
+    "tags": [
+      "wifi",
+      "security"
+    ],
+    "source": {
+      "type": "github-release",
+      "repository": "ThingPulse/esp32-pendrive-s3-wifi-dongle"
+    },
     "versions": [
       {
-        "name": "1.0.0",
+        "name": "1.2.0-rc.2",
+        "channel": "snapshot",
+        "publishedAt": "2026-07-18T13:03:23Z",
+        "releaseUrl": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle/releases/tag/v1.2.0-rc.2",
+        "notes": "",
         "partitions": [
           {
-            "name": "Bootloader",
-            "data": [],
-            "offset": "0x0",
-            "url": "./assets/apps/wifi-dongle/bootloader.bin"
+            "name": "bootloader",
+            "data": "",
+            "offset": 0,
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/bootloader.bin",
+            "sha256": "16f90c46edc2db31167b54bcdbca2730ea1bdcaeba4eedd072ea98c8bba530ab",
+            "size": 20832
           },
           {
-            "name": "Partition Table",
-            "data": [],
-            "offset": "0x8000",
-            "url": "./assets/apps/wifi-dongle/partition-table.bin"
+            "name": "partition-table",
+            "data": "",
+            "offset": 32768,
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/partition-table.bin",
+            "sha256": "d1c0e9d02fa9d26cd2e1984e7b5dd20157204f501ddc83ce82229e5f3175ee8b",
+            "size": 3072
           },
           {
-            "name": "Firmware",
-            "data": [],
-            "offset": "0x10000",
-            "url": "./assets/apps/wifi-dongle/usb_dongle.bin"
+            "name": "otadata",
+            "data": "",
+            "offset": 53248,
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/ota_data_initial.bin",
+            "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
+            "size": 8192
+          },
+          {
+            "name": "application",
+            "data": "",
+            "offset": 65536,
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/usb_dongle.bin",
+            "sha256": "f8340b588b407484670d2a2e5b28201e11a7180bb83b943ae18ed5166e3e4610",
+            "size": 842368
           }
         ]
       }
-    ],
-    "tags": [
-      "network",
-      "wifi",
-      "wifi-dongle"
     ]
   },
   {

@@ -8,6 +8,14 @@
       "manifestAsset": "app-market.json",
       "retainVersions": 3,
       "retainSnapshots": 3
+    },
+    {
+      "id": "tp-pendrive-s3-wifi-dongle",
+      "repository": "ThingPulse/esp32-pendrive-s3-wifi-dongle",
+      "enabled": true,
+      "manifestAsset": "app-market.json",
+      "retainVersions": 3,
+      "retainSnapshots": 3
     }
   ]
 }
