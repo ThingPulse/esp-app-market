@@ -1,0 +1,92 @@
+<a class="back-link" routerLink="/"><mat-icon>arrow_back</mat-icon> Back to devices</a>
+
+<header class="diagnostics-hero">
+  <div>
+    <p class="eyebrow">Read-only device tools</p>
+    <h1 class="page-title">ESP diagnostics</h1>
+    <p class="page-intro">Connect an Espressif board to identify its chip, capabilities, MAC address, crystal, flash memory, and USB adapter.</p>
+  </div>
+  <div class="diagnostic-mark" aria-hidden="true"><mat-icon>troubleshoot</mat-icon></div>
+</header>
+
+<section class="connect-panel" *ngIf="!diagnostics">
+  <div class="connect-copy">
+    <span class="step-number">01</span>
+    <div>
+      <h2>{{loading ? 'Reading device information…' : 'Connect your ESP'}}</h2>
+      <p>The browser will ask you to select a serial port. The chip will restart into its ROM bootloader during inspection.</p>
+    </div>
+  </div>
+
+  <div class="privacy-note">
+    <mat-icon>shield</mat-icon>
+    <div>
+      <strong>Local and read-only</strong>
+      <span>No flash data is erased, changed, uploaded, or included in analytics.</span>
+    </div>
+  </div>
+
+  <button mat-raised-button class="primary-action inspect-button" (click)="inspectDevice()" [disabled]="loading">
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    <mat-icon *ngIf="!loading">usb</mat-icon>
+    {{loading ? 'Inspecting…' : 'Select device & inspect'}}
+  </button>
+
+  <div class="error-message" *ngIf="errorMessage"><mat-icon>error_outline</mat-icon>{{errorMessage}}</div>
+</section>
+
+<ng-container *ngIf="diagnostics as report">
+  <section class="report-header">
+    <div>
+      <span class="status-pill"><i></i> Inspection complete</span>
+      <h2>{{report.chipDescription}}</h2>
+      <p>Inspected locally {{report.inspectedAt | date:'medium'}}</p>
+    </div>
+    <div class="report-actions">
+      <button mat-stroked-button (click)="exportReport()"><mat-icon>download</mat-icon> Export JSON</button>
+      <button mat-raised-button class="primary-action" (click)="inspectDevice()"><mat-icon>refresh</mat-icon> Inspect another</button>
+    </div>
+  </section>
+
+  <div class="diagnostic-grid">
+    <article class="diagnostic-card identity-card">
+      <div class="card-heading"><mat-icon>memory</mat-icon><span>Chip identity</span></div>
+      <dl>
+        <div><dt>Family</dt><dd>{{report.chipFamily}}</dd></div>
+        <div><dt>Description</dt><dd>{{report.chipDescription}}</dd></div>
+        <div><dt>Crystal</dt><dd>{{report.crystalFrequencyMhz}} MHz</dd></div>
+        <div><dt>Base MAC</dt><dd class="mono">{{report.macAddress}}</dd></div>
+      </dl>
+    </article>
+
+    <article class="diagnostic-card">
+      <div class="card-heading"><mat-icon>storage</mat-icon><span>SPI flash</span></div>
+      <dl>
+        <div><dt>Capacity</dt><dd>{{formatBytes(report.flashSizeBytes)}}</dd></div>
+        <div><dt>Manufacturer ID</dt><dd class="mono">{{report.flashManufacturerId}}</dd></div>
+        <div><dt>Device ID</dt><dd class="mono">{{report.flashDeviceId}}</dd></div>
+      </dl>
+    </article>
+
+    <article class="diagnostic-card">
+      <div class="card-heading"><mat-icon>usb</mat-icon><span>USB connection</span></div>
+      <dl>
+        <div><dt>Vendor ID</dt><dd class="mono">{{report.usbVendorId || 'Not reported'}}</dd></div>
+        <div><dt>Product ID</dt><dd class="mono">{{report.usbProductId || 'Not reported'}}</dd></div>
+        <div><dt>Transport</dt><dd>Web Serial</dd></div>
+      </dl>
+    </article>
+
+    <article class="diagnostic-card features-card">
+      <div class="card-heading"><mat-icon>auto_awesome</mat-icon><span>Detected capabilities</span></div>
+      <div class="feature-list">
+        <span *ngFor="let feature of report.features"><mat-icon>check_circle</mat-icon>{{feature}}</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="report-footer">
+    <p><mat-icon>info</mat-icon>Diagnostics use the ROM bootloader and a temporary RAM stub. Flash contents are not modified.</p>
+    <button mat-button (click)="disconnect()"><mat-icon>link_off</mat-icon> Disconnect</button>
+  </div>
+</ng-container>

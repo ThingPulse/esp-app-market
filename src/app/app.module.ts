@@ -12,9 +12,11 @@ import { CacheInterceptor } from './services/cache.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlasherComponent } from './flasher/flasher.component';
 import { FullTextFilterPipe } from './services/full-text-filter.pipe';
+import { DiagnosticsComponent } from './diagnostics/diagnostics.component';
 
 const routes: Routes = [
   { path: '', component: DevicesComponent },
+  { path: 'diagnostics', component: DiagnosticsComponent },
   { path: 'device/:deviceId', component: AppsComponent },
   { path: 'device/:deviceId/app/:appId', component: FlasherComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' },
@@ -27,6 +29,7 @@ const routes: Routes = [
     DevicesComponent,
     AppsComponent,
     FlasherComponent,
+    DiagnosticsComponent,
     FullTextFilterPipe
   ],
   imports: [

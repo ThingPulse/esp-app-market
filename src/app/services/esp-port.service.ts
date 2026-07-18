@@ -5,6 +5,7 @@ import { ESPLoader, FlashOptions, IEspLoaderTerminal, LoaderOptions, Transport }
 import { firstValueFrom, Subject } from 'rxjs';
 import { LineBreakTransformer, Partition, PartitionProgress, sleep, TestState } from './utils.service';
 import { MD5, enc  } from 'crypto-js'; 
+import { DeviceDiagnostics } from '../models/device-diagnostics';
 
 
 @Injectable({
@@ -74,7 +75,7 @@ export class EspPortService {
     }
     if (!navigator.serial) {
       this.monitorMessageSource.next("This browser does not support WebSerial API.\nPlease use Chrome or Edge...");
-      return;
+      throw new Error('This browser does not support the Web Serial API. Please use Chrome or Edge.');
     }
     const port = await navigator.serial.requestPort();
     this.transport = new Transport(port);
@@ -92,9 +93,51 @@ export class EspPortService {
       console.log(this.esploader.chip);
     } catch (e) {
       console.error(e);
+      try {
+        await this.transport.disconnect();
+      } catch (disconnectError) {
+        console.debug('Could not close the failed serial connection', disconnectError);
+      }
+      throw e;
     }
     await this.openPort(port);
 
+  }
+
+  async readDiagnostics(): Promise<DeviceDiagnostics> {
+    await this.connect();
+
+    const chip = this.esploader.chip;
+    const portInfo = this.port.getInfo();
+    const chipDescription = await chip.get_chip_description(this.esploader);
+    const features = await chip.get_chip_features(this.esploader);
+    const crystalFrequencyMhz = await chip.get_crystal_freq(this.esploader);
+    const macAddress = await chip.read_mac(this.esploader);
+    const flashId = await this.esploader.read_flash_id();
+    const flashCapacityCode = (flashId >> 16) & 0xff;
+    const flashSizeBytes = this.esploader.DETECTED_FLASH_SIZES_NUM[flashCapacityCode] ?? null;
+
+    return {
+      chipFamily: chip.CHIP_NAME,
+      chipDescription,
+      features,
+      crystalFrequencyMhz,
+      macAddress: macAddress.toUpperCase(),
+      flashManufacturerId: this.toHexByte(flashId & 0xff),
+      flashDeviceId: `${this.toHexByte((flashId >> 8) & 0xff)}${this.toHexByte(flashCapacityCode)}`,
+      flashSizeBytes,
+      usbVendorId: this.toOptionalHex(portInfo.usbVendorId),
+      usbProductId: this.toOptionalHex(portInfo.usbProductId),
+      inspectedAt: new Date().toISOString()
+    };
+  }
+
+  private toHexByte(value: number): string {
+    return `0x${value.toString(16).padStart(2, '0').toUpperCase()}`;
+  }
+
+  private toOptionalHex(value: number | undefined): string | null {
+    return value === undefined ? null : `0x${value.toString(16).padStart(4, '0').toUpperCase()}`;
   }
 
   async openPort(port: SerialPort) {

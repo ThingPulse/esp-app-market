@@ -38,3 +38,11 @@ test('device search filters the catalog', async ({ page }) => {
   await expect(page.locator('.device-card')).toHaveCount(1);
   await expect(page.getByRole('heading', { name: 'Icon256' })).toBeVisible();
 });
+
+test('read-only diagnostics visual', async ({ page }) => {
+  await openCatalog(page);
+  await page.getByRole('link', { name: /Diagnostics/i }).click();
+  await expect(page.getByRole('heading', { name: 'ESP diagnostics' })).toBeVisible();
+  await expect(page.getByText('Local and read-only')).toBeVisible();
+  await expect(page).toHaveScreenshot('diagnostics.png', { fullPage: true });
+});
