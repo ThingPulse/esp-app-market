@@ -1,134 +1,185 @@
-# SuperWiFiDuck manifest-generation prompt
+# Firmware repository integration prompt
 
-Use the following prompt with Codex while the `ThingPulse/SuperWiFiDuck`
-repository is open:
+Use this prompt with Codex while the firmware repository you want to integrate
+is open. Replace the values in the **ESP App Market values** section first.
 
 ```text
-Fix the ESP App Market manifest generation in this SuperWiFiDuck repository.
+Prepare this public GitHub firmware repository for integration with the ESP App
+Market GitHub Release catalog.
 
-The generated manifests from releases `v1.2.0-rc.1` and `v1.2.0-rc.2` do not
-satisfy the ESP App Market schema. Inspect the existing manifest template,
-generation script, tests, and GitHub release workflow before editing.
+Inspect the repository's build system, generated binaries, flash offsets,
+version source, existing tests, icon files, and GitHub Actions workflows before
+editing. Reuse and extend the existing release workflow instead of creating a
+competing release process.
 
-Make these changes:
+ESP App Market values supplied by me:
 
-1. Correct the application identifiers
+- Application ID: <APP_MARKET_APPLICATION_ID>
+- Supported device IDs: <APP_MARKET_DEVICE_IDS>
+- Display name: <APPLICATION_DISPLAY_NAME>
+- Release icon filename: <ICON_RELEASE_FILENAME, for example logo.png>
+- Manifest release filename: app-market.json
 
-The generated manifest must contain exactly:
+The application ID and device IDs are identifiers from the ESP App Market. They
+are not repository names or filenames. Use them exactly as supplied. If any of
+these values are missing, ask me for them before implementing; do not invent
+them.
 
-{
-  "id": "tp-pendrive-s3-super-wifi-duck",
-  "supportedDevices": [
-    "tp-pendrive-s3"
-  ]
-}
+## Required release assets
 
-Do not use `super-wifi-duck` as either the application ID or device ID.
+Each GitHub Release must contain:
 
-2. Correct the icon representation
+1. `app-market.json`.
+2. The icon file referenced by `app.icon.asset`.
+3. Every firmware binary referenced by `release.partitions[].asset`.
 
-`app.icon` must be an asset-reference object, not a filename string:
+All `asset` values in the manifest refer to assets attached to the SAME GitHub
+Release as `app-market.json`. They do not refer to files in the Git repository,
+raw GitHub URLs, web URLs, build-directory paths, or application runtime paths.
 
-{
+## Critical icon rules
+
+There are three distinct icon concepts. Do not confuse them:
+
+1. Source icon: an existing file somewhere in the checked-out repository, such
+   as `docs/images/product-logo.png`. This path is used only by the build or
+   release script.
+2. Staged release icon: the source icon copied into the release staging
+   directory with a stable filename, such as `dist/release/logo.png`.
+3. Manifest icon asset: only the staged file's basename, such as `logo.png`.
+
+`app.icon` MUST be an object with `asset` and `sha256`. It MUST NOT be a string.
+`app.icon.asset` MUST be a plain filename with no `/` or `\\` characters. The
+same filename must be uploaded as a GitHub Release asset.
+
+Correct:
+
+"icon": {
   "asset": "logo.png",
-  "sha256": "<SHA-256 of the exact logo.png release asset>"
+  "sha256": "<SHA-256 of the final staged logo.png>"
 }
 
-Calculate the checksum during release preparation from the exact file that will
-be uploaded. Do not hard-code the current checksum and do not use a placeholder.
+Incorrect examples:
 
-3. Generate this manifest shape
+"icon": "logo.png"
+"icon": { "asset": "assets/logo.png" }
+"icon": { "asset": "dist/release/logo.png" }
+"icon": { "asset": "https://raw.githubusercontent.com/.../logo.png" }
+"icon": { "asset": "/assets/apps/logo.png" }
 
-The final release manifest must have this structure:
+Choose the source icon by inspecting the repository. Copy it to the release
+staging directory using the supplied release icon filename. Calculate SHA-256
+from that final staged copy, after copying or conversion. Upload that exact
+staged file to the GitHub Release. Do not calculate the checksum from a
+different source file and do not hard-code or placeholder the checksum.
+
+## Manifest generation
+
+Add a deterministic repository-native script that generates the final
+`app-market.json` from the actual staged release files. Prefer the language and
+tooling already used by the repository.
+
+The generated manifest must follow this shape:
 
 {
   "schemaVersion": 1,
   "app": {
-    "id": "tp-pendrive-s3-super-wifi-duck",
-    "name": "SuperWifiDuck",
-    "description": "Wi-Fi controlled USB HID device for running Ducky Script payloads on the ThingPulse Pendrive S3.",
-    "supportedDevices": [
-      "tp-pendrive-s3"
-    ],
-    "tags": [
-      "wifi",
-      "security"
-    ],
+    "id": "<exact supplied application ID>",
+    "name": "<supplied display name>",
+    "description": "<concise description derived from the repository>",
+    "supportedDevices": ["<exact supplied device ID>"],
+    "tags": ["<relevant tag>"],
     "icon": {
-      "asset": "logo.png",
-      "sha256": "<calculated logo.png SHA-256>"
+      "asset": "<release icon basename only>",
+      "sha256": "<calculated SHA-256 of the staged release icon>"
     }
   },
   "release": {
-    "version": "<version normalized from the release tag>",
+    "version": "<version normalized from the Git tag>",
     "partitions": [
       {
-        "name": "firmware",
-        "asset": "app-firmware.bin",
-        "offset": "0x0000",
-        "sha256": "<calculated app-firmware.bin SHA-256>"
+        "name": "<partition name>",
+        "asset": "<release binary basename only>",
+        "offset": "<actual hexadecimal flash offset>",
+        "sha256": "<calculated SHA-256 of the staged release binary>"
       }
     ]
   }
 }
 
-For example, tag `v1.2.0-rc.3` must produce manifest version `1.2.0-rc.3`.
+All firmware `asset` fields follow the same release-asset rule as the icon:
+basename only, no repository path and no URL. For example, use `firmware.bin`,
+not `.pio/build/board/firmware.bin`. The release script may copy the latter to
+the staging directory as the former.
 
-4. Verify release assets
+Get the version from the Git tag or authoritative project version. Remove only
+an optional leading `v`; for example, `v1.2.0-rc.1` becomes `1.2.0-rc.1`.
 
-The release workflow must upload exactly the files referenced by the manifest:
+Discover the binaries and flash offsets from the real build configuration and
+output. Include every image needed to flash an erased device. Do not guess
+offsets or change the existing firmware partition layout.
 
-- `app-market.json`
-- `app-firmware.bin`
-- `logo.png`
+The generator and validation must fail if:
 
-Before publishing, validation must fail if:
+- A referenced staged asset is missing.
+- An asset value contains a directory component or URL.
+- `app.icon` is anything other than an object with `asset` and `sha256`.
+- An application or device ID differs from the supplied value.
+- A checksum is not exactly 64 hexadecimal characters.
+- A checksum does not match the final staged asset.
+- The manifest version does not match the release tag after normalization.
+- Firmware partitions overlap based on offset and staged file size.
 
-- A referenced file is missing.
-- A checksum is not 64 hexadecimal characters.
-- A generated checksum does not match its referenced file.
-- The application ID is incorrect.
-- The supported device ID is incorrect.
-- `app.icon` is a string instead of an object.
-- The manifest version does not match the Git tag after removing the optional
-  `v` prefix.
+## GitHub release workflow
 
-Calculate SHA-256 checksums from the final staged release assets, after any
-copying or renaming.
+Add or update the GitHub Actions release workflow so it:
 
-5. Add or update tests
+- Runs for tags matching `v*` and supports `workflow_dispatch` for validation.
+- Installs pinned dependencies and performs a clean firmware build.
+- Creates a clean release staging directory.
+- Copies/renames the required binaries and source icon into that directory.
+- Generates `app-market.json` only after all final assets have been staged.
+- Validates all filenames, offsets, sizes, and checksums.
+- Verifies every manifest reference resolves to a file in the staging directory.
+- Uploads `app-market.json` and those exact staged files to one GitHub Release.
+- Marks SemVer `-rc`, `-beta`, and `-alpha` versions as GitHub prereleases.
+- Publishes ordinary versions such as `v1.2.0` as stable releases.
+- Uses `GITHUB_TOKEN` with only the required permissions.
+- Does not commit generated build or staging artifacts.
 
-Add tests that verify:
+## Tests and documentation
 
-- The exact application ID.
-- The exact supported device ID.
-- `app.icon.asset` equals `logo.png`.
-- `app.icon.sha256` matches the staged `logo.png`.
-- The firmware checksum matches the staged firmware.
-- A prerelease tag such as `v1.2.0-rc.3` becomes version `1.2.0-rc.3`.
-- The final manifest satisfies the expected object structure.
-- Missing assets and checksum mismatches fail release preparation.
+Add focused automated tests for:
 
-Use the repository's existing test approach and tooling where possible.
+- Exact application and device IDs.
+- Icon object shape.
+- Rejection of repository paths, absolute paths, and URLs in asset fields.
+- Icon and firmware checksums against final staged files.
+- Artifact discovery and missing artifacts.
+- Correct flash offsets and overlapping ranges.
+- Stable and prerelease version normalization.
+- Final manifest structure.
 
-6. Preserve scope
+Document exact local commands for building, staging, generating, and validating
+the release. Document how to create a snapshot tag such as `v1.2.0-rc.1` and a
+stable tag such as `v1.2.0`.
 
-Do not change firmware functionality, flash layout, partition offsets, or
-unrelated application code. Do not publish a release, create or delete tags,
-push changes, or open a pull request.
+## Scope and final report
+
+Do not change firmware behavior, device behavior, partition layout, or unrelated
+application code. Do not publish a release, create or delete tags, push commits,
+or open a pull request unless I explicitly request it.
 
 After implementing:
 
-- Run the manifest tests.
-- Run the manifest generator against locally staged firmware and logo assets.
-- Show the generated `app-market.json`.
-- Independently recalculate both SHA-256 values and confirm they match.
-- Report every changed file and command result.
-- Tell me the exact command or tag to use for the next snapshot release.
-
-Important release-history context:
-
-The existing `v1.2.0-rc.1` and `v1.2.0-rc.2` manifests are invalid. The next test
-release should normally be `v1.2.0-rc.3`. Do not modify or publish releases
-automatically.
+- Run the relevant tests and one real firmware build.
+- Generate the manifest using locally staged release assets.
+- Show the final generated manifest.
+- List the staging directory and prove that every manifest asset is present
+  there under exactly the declared basename.
+- Independently recalculate and compare all SHA-256 checksums.
+- Report changed files, commands and results, final release asset filenames,
+  flash offsets, and required repository settings.
+- Provide the exact `catalog/sources.json` entry for the ESP App Market.
+- Tell me the next snapshot tag to create, but do not create it.
 ```
