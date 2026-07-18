@@ -10,12 +10,12 @@
             "tp-pendrive-s3"
         ],
         "versions": [{
-            "name": "1.0.0",
+            "name": "1.0.1",
             "partitions": [{
                 "name": "Firmware",
                 "data": [],
                 "offset": 0,
-                "url": "./assets/apps/super-wifi-duck/app-firmware.bin"
+                "url": "./assets/apps/super-wifi-duck/app-firmware-20260718.bin"
             }]
         }],
 
@@ -278,7 +278,7 @@
             "tp-default-device"
         ],
         "versions": [{
-            "name": "1.0.0",
+            "name": "1.0.1",
             "partitions": []
         }]
         
