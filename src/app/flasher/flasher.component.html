@@ -92,8 +92,8 @@
 
 <mat-expansion-panel class="console-panel">
   <mat-expansion-panel-header>
-    <mat-panel-title><mat-icon>terminal</mat-icon> Serial console</mat-panel-title>
-    <mat-panel-description>{{messageCount}} messages</mat-panel-description>
+    <mat-panel-title class="console-title"><mat-icon>terminal</mat-icon> Serial console</mat-panel-title>
+    <mat-panel-description class="console-count">{{messageCount}} messages</mat-panel-description>
   </mat-expansion-panel-header>
   <textarea class="serial-console" #console [scrollTop]="console.scrollHeight" [(ngModel)]="messageArea" rows="16" aria-label="Serial console output"></textarea>
 </mat-expansion-panel>

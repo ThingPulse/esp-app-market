@@ -148,6 +148,24 @@ a {
   box-shadow: 0 12px 30px rgba(34, 211, 238, .16) !important;
 }
 
+.console-panel .mat-expansion-panel-header,
+.console-panel .mat-expansion-panel-header-title {
+  color: #e2e8f0 !important;
+}
+
+.console-panel .mat-expansion-panel-header-title mat-icon {
+  color: #22d3ee !important;
+}
+
+.console-panel .mat-expansion-panel-header-description {
+  color: #94a3b8 !important;
+}
+
+.console-panel .mat-expansion-indicator::after {
+  color: #94a3b8 !important;
+  border-color: currentColor !important;
+}
+
 @media (max-width: 700px) {
   .section-heading {
     align-items: stretch;

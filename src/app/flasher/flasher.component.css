@@ -175,6 +175,19 @@
 
 .console-panel mat-panel-title { display: flex; align-items: center; gap: 8px; }
 
+.console-title {
+  color: #e2e8f0 !important;
+  font-weight: 700;
+}
+
+.console-title mat-icon {
+  color: #22d3ee !important;
+}
+
+.console-count {
+  color: #94a3b8 !important;
+}
+
 :host ::ng-deep .console-panel .mat-expansion-panel-header-title {
   color: #e2e8f0;
   font-weight: 700;

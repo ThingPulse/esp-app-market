@@ -27,6 +27,8 @@ test('installer visual', async ({ page }) => {
   await openFirstDevice(page);
   await page.locator('.app-card').first().getByRole('link', { name: /Install/i }).click();
   await expect(page.getByRole('heading', { name: /Install to device/i })).toBeVisible();
+  await expect(page.locator('.console-title')).toHaveCSS('color', 'rgb(226, 232, 240)');
+  await expect(page.locator('.console-count')).toHaveCSS('color', 'rgb(148, 163, 184)');
   await expect(page).toHaveScreenshot('firmware-installer.png', { fullPage: true });
 });
 
