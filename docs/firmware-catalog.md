@@ -5,6 +5,11 @@ validated GitHub Releases. Existing entries remain in `catalog/apps.manual.json`
 A repository becomes automated only after its app ID is added to
 `catalog/sources.json` and at least one eligible release passes validation.
 
+For new firmware repositories, use the interactive scaffolder described in
+`docs/repository-onboarding.md`. It generates the repository config, manifest
+builder, validation, and release workflow without relying on a prompt to
+reproduce the catalog contract.
+
 ## Catalog files
 
 - `catalog/apps.manual.json`: legacy/manual entries.

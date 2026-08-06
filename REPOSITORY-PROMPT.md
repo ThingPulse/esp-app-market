@@ -1,5 +1,11 @@
 # Firmware repository integration prompt
 
+> Prefer the deterministic scaffolder documented in
+> `docs/repository-onboarding.md`. Run `npm run repository:init -- --target
+> ../firmware-repository` from the app-market repository first. This prompt is a
+> review/fallback aid; it is no longer the primary way to reproduce the manifest
+> and release workflow.
+
 Use this prompt with Codex while the firmware repository you want to integrate
 is open. Replace the values in the **ESP App Market values** section first.
 

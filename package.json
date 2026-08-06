@@ -12,6 +12,8 @@
     "catalog:sync:snapshots": "node scripts/sync-catalog.js --include-snapshots",
     "catalog:check": "node scripts/sync-catalog.js --check",
     "catalog:test": "node --test scripts/sync-catalog.test.js",
+    "repository:init": "node scripts/prepare-repository.js",
+    "repository:test": "node --test scripts/prepare-repository.test.js",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots=all"
   },

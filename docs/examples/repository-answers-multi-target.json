@@ -1,0 +1,57 @@
+{
+  "setupCommand": "python -m pip install platformio",
+  "buildCommand": "pio run -e color-kit-grande -e color-kit-pro",
+  "config": {
+    "schemaVersion": 1,
+    "targets": [
+      {
+        "environment": "color-kit-grande",
+        "manifestAsset": "app-market-grande.json",
+        "app": {
+          "id": "tp-color-kit-grande-example-app",
+          "name": "Example App for Color Kit Grande",
+          "description": "Example firmware built for the ESP32-based Color Kit Grande.",
+          "repository": "https://github.com/ThingPulse/example-firmware",
+          "supportedDevices": ["tp-color-kit-grande"],
+          "tags": ["example", "esp32"]
+        },
+        "icon": {
+          "source": "docs/images/product.png",
+          "asset": "product.png"
+        },
+        "partitions": [
+          {
+            "name": "Application",
+            "source": ".pio/build/color-kit-grande/firmware.bin",
+            "asset": "firmware-grande.bin",
+            "offset": "0x10000"
+          }
+        ]
+      },
+      {
+        "environment": "color-kit-pro",
+        "manifestAsset": "app-market-pro.json",
+        "app": {
+          "id": "tp-color-kit-pro-example-app",
+          "name": "Example App for Color Kit Pro",
+          "description": "Example firmware built for the ESP32-S3-based Color Kit Pro.",
+          "repository": "https://github.com/ThingPulse/example-firmware",
+          "supportedDevices": ["tp-color-kit-pro"],
+          "tags": ["example", "esp32-s3"]
+        },
+        "icon": {
+          "source": "docs/images/product.png",
+          "asset": "product.png"
+        },
+        "partitions": [
+          {
+            "name": "Application",
+            "source": ".pio/build/color-kit-pro/firmware.bin",
+            "asset": "firmware-pro.bin",
+            "offset": "0x10000"
+          }
+        ]
+      }
+    ]
+  }
+}

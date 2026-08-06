@@ -1,0 +1,37 @@
+{
+  "setupCommand": "python -m pip install platformio",
+  "buildCommand": "pio run",
+  "config": {
+    "schemaVersion": 1,
+    "app": {
+      "id": "tp-example-device-example-app",
+      "name": "Example App",
+      "description": "Example firmware for a ThingPulse device.",
+      "repository": "https://github.com/ThingPulse/example-firmware",
+      "supportedDevices": [
+        "tp-example-device"
+      ],
+      "tags": [
+        "example"
+      ]
+    },
+    "icon": {
+      "source": "docs/images/product.png",
+      "asset": "product.png"
+    },
+    "partitions": [
+      {
+        "name": "Bootloader",
+        "source": ".pio/build/board/bootloader.bin",
+        "asset": "bootloader.bin",
+        "offset": "0x0"
+      },
+      {
+        "name": "Application",
+        "source": ".pio/build/board/firmware.bin",
+        "asset": "firmware.bin",
+        "offset": "0x10000"
+      }
+    ]
+  }
+}

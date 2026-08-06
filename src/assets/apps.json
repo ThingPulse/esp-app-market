@@ -132,10 +132,10 @@
   },
   {
     "id": "tp-pendrive-s3-wifi-dongle",
-    "name": "SuperWifiDuck",
+    "name": "Pendrive S3 Wi-Fi Dongle",
     "description": "USB Wi-Fi dongle firmware for the ThingPulse ESP32-S3 Pendrive.",
     "instructions": "",
-    "version": "1.2.0-rc.2",
+    "version": "1.2.0",
     "repository": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle",
     "appIcon": "/assets/generated/tp-pendrive-s3-wifi-dongle/ESP32-S3.png",
     "supportedDevices": [
@@ -151,25 +151,25 @@
     },
     "versions": [
       {
-        "name": "1.2.0-rc.2",
-        "channel": "snapshot",
-        "publishedAt": "2026-07-18T13:03:23Z",
-        "releaseUrl": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle/releases/tag/v1.2.0-rc.2",
+        "name": "1.2.0",
+        "channel": "stable",
+        "publishedAt": "2026-07-18T14:38:15Z",
+        "releaseUrl": "https://github.com/ThingPulse/esp32-pendrive-s3-wifi-dongle/releases/tag/v1.2.0",
         "notes": "",
         "partitions": [
           {
             "name": "bootloader",
             "data": "",
             "offset": 0,
-            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/bootloader.bin",
-            "sha256": "16f90c46edc2db31167b54bcdbca2730ea1bdcaeba4eedd072ea98c8bba530ab",
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0/bootloader.bin",
+            "sha256": "11acc9ccabde1ca613769830d5f0191a663a664d02d91dd1f9b4cd33f4b6b91a",
             "size": 20832
           },
           {
             "name": "partition-table",
             "data": "",
             "offset": 32768,
-            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/partition-table.bin",
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0/partition-table.bin",
             "sha256": "d1c0e9d02fa9d26cd2e1984e7b5dd20157204f501ddc83ce82229e5f3175ee8b",
             "size": 3072
           },
@@ -177,7 +177,7 @@
             "name": "otadata",
             "data": "",
             "offset": 53248,
-            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/ota_data_initial.bin",
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0/ota_data_initial.bin",
             "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f",
             "size": 8192
           },
@@ -185,8 +185,8 @@
             "name": "application",
             "data": "",
             "offset": 65536,
-            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0-rc.2/usb_dongle.bin",
-            "sha256": "f8340b588b407484670d2a2e5b28201e11a7180bb83b943ae18ed5166e3e4610",
+            "url": "/assets/generated/tp-pendrive-s3-wifi-dongle/1.2.0/usb_dongle.bin",
+            "sha256": "e9252bfcda7ed63d97794bed6f8c0d33838f76d34211ababde0e66ea8e7f6638",
             "size": 842368
           }
         ]
@@ -284,49 +284,62 @@
   },
   {
     "id": "tp-color-kit-grande-ckos",
-    "name": "Color Kit OS",
-    "description": "Operating System For the Color Kit Devices",
+    "name": "ESP32 ePulse OS",
+    "description": "Operating System for Color Kit Devices",
     "instructions": "",
-    "version": "1.0.5",
-    "repository": "https://github.com/ThingPulse/color-kit-os",
-    "appIcon": "/assets/apps/ckg-color-kit-os/CKOS.jpeg",
+    "version": "0.1.0-beta.1",
+    "repository": "https://github.com/ThingPulse/esp32-gadget-os",
+    "appIcon": "/assets/generated/tp-color-kit-grande-ckos/app-icon.png",
     "supportedDevices": [
       "tp-color-kit-grande"
     ],
+    "tags": [],
+    "source": {
+      "type": "github-release",
+      "repository": "ThingPulse/esp32-gadget-os"
+    },
     "versions": [
       {
-        "name": "1.0.0",
+        "name": "0.1.0-beta.1",
+        "channel": "snapshot",
+        "publishedAt": "2026-08-06T13:06:45Z",
+        "releaseUrl": "https://github.com/ThingPulse/esp32-gadget-os/releases/tag/v0.1.0-beta.1",
+        "notes": "",
         "partitions": [
           {
             "name": "Bootloader",
-            "data": [],
-            "offset": "0x1000",
-            "url": "./assets/apps/ckg-color-kit-os/bootloader.bin"
+            "data": "",
+            "offset": 4096,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.0-beta.1/esp32-color-kit-bootloader.bin",
+            "sha256": "3d234a7471f67b013686dabd4dee7c1fa915c9928463616a94bc9297acf1abf8",
+            "size": 17536
           },
           {
-            "name": "Partition Table",
-            "data": [],
-            "offset": "0x8000",
-            "url": "./assets/apps/ckg-color-kit-os/partitions.bin"
+            "name": "Partition table",
+            "data": "",
+            "offset": 32768,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.0-beta.1/esp32-color-kit-partitions.bin",
+            "sha256": "aaae2888c5a6a348004b5b436f47abb25ae32e72d9003902955a998eda723edd",
+            "size": 3072
           },
           {
-            "name": "Boot App",
-            "data": [],
-            "offset": "0xe000",
-            "url": "./assets/apps/ckg-color-kit-os/boot_app0.bin"
+            "name": "OTA data",
+            "data": "",
+            "offset": 57344,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.0-beta.1/esp32-color-kit-boot-app0.bin",
+            "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
+            "size": 8192
           },
           {
             "name": "Firmware",
-            "data": [],
-            "offset": "0x10000",
-            "url": "./assets/apps/ckg-color-kit-os/firmware.bin"
+            "data": "",
+            "offset": 65536,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.0-beta.1/esp32-color-kit-firmware.bin",
+            "sha256": "267d1949b894a3a211de62051b37730aaae1d16ad3fcdc0881b51698794412e4",
+            "size": 1891984
           }
         ]
       }
-    ],
-    "tags": [
-      "touch-screen",
-      "esp32"
     ]
   },
   {
