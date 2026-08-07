@@ -70,5 +70,3 @@ esp-app-market: https://github.com/ThingPulse/esp32-epulse-feather-testbed
 - Question: When I connect my ESP32 no device shows up in the device pop-up
 - Answer: If your operating system does not support the Serial-To-UART chip you still
   have to install the driver. Check with your device manufacturer where to get this driver
-
-
