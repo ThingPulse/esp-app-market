@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   sync:
@@ -36,18 +35,15 @@ jobs:
       - name: Build application
         run: ./node_modules/.bin/ng build
 
-      - name: Create catalog update pull request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: automation/firmware-catalog
-          delete-branch: true
-          commit-message: "chore: update firmware catalog"
-          title: "chore: update firmware catalog"
-          body: |
-            Automated update from published GitHub Releases.
+      - name: Commit catalog changes
+        run: |
+          if git diff --quiet -- src/assets/apps.json src/assets/generated; then
+            echo "Catalog is already up to date; nothing to commit."
+            exit 0
+          fi
 
-            Release manifests, asset checksums, device references, partition layouts,
-            the catalog generator tests, and the Angular production build have passed.
-          add-paths: |
-            src/assets/apps.json
-            src/assets/generated/**
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/apps.json src/assets/generated
+          git commit -m "chore: update firmware catalog"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

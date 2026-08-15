@@ -148,7 +148,12 @@ The hourly `Sync firmware catalog` workflow:
 6. Rejects overlapping partitions and unknown device IDs.
 7. Generates the combined manual/automated catalog.
 8. Runs generator tests and an Angular production build.
-9. Opens or updates a catalog pull request.
+9. Commits updated catalog files to the default branch when changes are detected.
+
+Every catalog sync commit triggers the Docker publish workflow through the normal
+`push` event. The image publish job emits an immutable `sha-<commit>` tag and
+refreshes `latest` on the default branch, so deployment watchdogs can detect
+and roll out catalog updates automatically.
 
 If the workflow fails, the deployed app market remains on its last known-good
 catalog.
