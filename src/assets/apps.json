@@ -267,10 +267,10 @@
   },
   {
     "id": "tp-color-kit-grande-ckos",
-    "name": "ESP32 ePulse OS",
+    "name": "ESP32 Gadget OS",
     "description": "Operating System for Color Kit Devices",
     "instructions": "",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "repository": "https://github.com/ThingPulse/esp32-gadget-os",
     "appIcon": "/assets/generated/tp-color-kit-grande-ckos/app-icon.png",
     "supportedDevices": [
@@ -282,6 +282,47 @@
       "repository": "ThingPulse/esp32-gadget-os"
     },
     "versions": [
+      {
+        "name": "0.1.4",
+        "channel": "stable",
+        "publishedAt": "2026-08-17T05:07:36Z",
+        "releaseUrl": "https://github.com/ThingPulse/esp32-gadget-os/releases/tag/v0.1.4",
+        "notes": "",
+        "partitions": [
+          {
+            "name": "Bootloader",
+            "data": "",
+            "offset": 4096,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.4/esp32-color-kit-bootloader.bin",
+            "sha256": "ef4ea64b8c5175a23427d78ce4c635a2d8d1b6811750c2597c46c5d458d2494a",
+            "size": 17536
+          },
+          {
+            "name": "Partition table",
+            "data": "",
+            "offset": 32768,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.4/esp32-color-kit-partitions.bin",
+            "sha256": "5eb2c4f486107920d6c32fc971781615742017ebb65617f2b3be1561ead20d74",
+            "size": 3072
+          },
+          {
+            "name": "OTA data",
+            "data": "",
+            "offset": 57344,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.4/esp32-color-kit-boot-app0.bin",
+            "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
+            "size": 8192
+          },
+          {
+            "name": "Firmware",
+            "data": "",
+            "offset": 65536,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.4/esp32-color-kit-firmware.bin",
+            "sha256": "3b9da7525b662ac0dd3e046162d080b5c4120425934459d4a20ee77c3e96d4ee",
+            "size": 1966656
+          }
+        ]
+      },
       {
         "name": "0.1.3",
         "channel": "stable",
@@ -361,47 +402,6 @@
             "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.2/esp32-color-kit-firmware.bin",
             "sha256": "ecb06ad4bdd48b5672a4d823a2b7cc77c813046c642e295e6085ec732ecb73b0",
             "size": 1955008
-          }
-        ]
-      },
-      {
-        "name": "0.1.1",
-        "channel": "stable",
-        "publishedAt": "2026-08-07T19:49:31Z",
-        "releaseUrl": "https://github.com/ThingPulse/esp32-gadget-os/releases/tag/v0.1.1",
-        "notes": "",
-        "partitions": [
-          {
-            "name": "Bootloader",
-            "data": "",
-            "offset": 4096,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.1/esp32-color-kit-bootloader.bin",
-            "sha256": "ef4ea64b8c5175a23427d78ce4c635a2d8d1b6811750c2597c46c5d458d2494a",
-            "size": 17536
-          },
-          {
-            "name": "Partition table",
-            "data": "",
-            "offset": 32768,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.1/esp32-color-kit-partitions.bin",
-            "sha256": "5eb2c4f486107920d6c32fc971781615742017ebb65617f2b3be1561ead20d74",
-            "size": 3072
-          },
-          {
-            "name": "OTA data",
-            "data": "",
-            "offset": 57344,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.1/esp32-color-kit-boot-app0.bin",
-            "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
-            "size": 8192
-          },
-          {
-            "name": "Firmware",
-            "data": "",
-            "offset": 65536,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.1/esp32-color-kit-firmware.bin",
-            "sha256": "68061024eae449bc04145eb7044025e980e955ec2941896fd4eb3e1289e164f4",
-            "size": 1943056
           }
         ]
       }
