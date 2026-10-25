@@ -2,8 +2,7 @@
 
 const { createHash } = require('crypto');
 const { mkdir, mkdtemp, readFile, rename, rm, writeFile } = require('fs/promises');
-const { basename, join } = require('path');
-const { tmpdir } = require('os');
+const { basename, dirname, join } = require('path');
 const Ajv = require('ajv/dist/2020');
 const addFormats = require('ajv-formats');
 
@@ -243,7 +242,8 @@ async function main() {
   const ajv = new Ajv({ allErrors: true, strict: true });
   addFormats(ajv);
   const validateManifest = ajv.compile(schema);
-  const temporaryRoot = await mkdtemp(join(tmpdir(), 'esp-app-market-catalog-'));
+  // Stage on the destination filesystem so publishing with rename also works in CI.
+  const temporaryRoot = await mkdtemp(join(dirname(OUTPUT_ASSETS), '.esp-app-market-catalog-'));
   const temporaryAssets = join(temporaryRoot, 'generated');
   await mkdir(temporaryAssets, { recursive: true });
 
