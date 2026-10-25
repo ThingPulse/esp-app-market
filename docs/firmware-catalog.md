@@ -149,9 +149,12 @@ The hourly `Sync firmware catalog` workflow:
 7. Generates the combined manual/automated catalog.
 8. Runs generator tests and an Angular production build.
 9. Commits updated catalog files to the default branch when changes are detected.
+10. Explicitly dispatches the Docker publish workflow on the updated branch after
+    successfully pushing a catalog commit. Unchanged catalogs skip this step.
 
-Every catalog sync commit triggers the Docker publish workflow through the normal
-`push` event. The image publish job emits an immutable `sha-<commit>` tag and
+The sync uses `workflow_dispatch` with the built-in `GITHUB_TOKEN` and
+`actions: write` permission because pushes made with that token do not trigger
+other workflows. The image publish job emits an immutable `sha-<commit>` tag and
 refreshes `latest` on the default branch, so deployment watchdogs can detect
 and roll out catalog updates automatically.
 

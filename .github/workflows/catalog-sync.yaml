@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -36,14 +37,22 @@ jobs:
         run: ./node_modules/.bin/ng build
 
       - name: Commit catalog changes
+        id: catalog
         run: |
-          if git diff --quiet -- src/assets/apps.json src/assets/generated; then
+          git add src/assets/apps.json src/assets/generated
+          if git diff --cached --quiet -- src/assets/apps.json src/assets/generated; then
             echo "Catalog is already up to date; nothing to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/assets/apps.json src/assets/generated
           git commit -m "chore: update firmware catalog"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Docker build
+        if: steps.catalog.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run docker-build-action.yaml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"
