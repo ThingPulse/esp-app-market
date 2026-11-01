@@ -270,7 +270,7 @@
     "name": "ESP32 Gadget OS",
     "description": "Operating System for Color Kit Devices",
     "instructions": "",
-    "version": "0.1.13",
+    "version": "0.1.14",
     "repository": "https://github.com/ThingPulse/esp32-gadget-os",
     "appIcon": "/assets/generated/tp-color-kit-grande-ckos/app-icon.png",
     "supportedDevices": [
@@ -282,6 +282,47 @@
       "repository": "ThingPulse/esp32-gadget-os"
     },
     "versions": [
+      {
+        "name": "0.1.14",
+        "channel": "stable",
+        "publishedAt": "2026-11-01T10:47:11Z",
+        "releaseUrl": "https://github.com/ThingPulse/esp32-gadget-os/releases/tag/v0.1.14",
+        "notes": "",
+        "partitions": [
+          {
+            "name": "Bootloader",
+            "data": "",
+            "offset": 4096,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.14/esp32-color-kit-bootloader.bin",
+            "sha256": "cef17495da011e6feaa4ecd5d8e786bd70fdd35cbc3e622d372d039dab4e4cd1",
+            "size": 23520
+          },
+          {
+            "name": "Partition table",
+            "data": "",
+            "offset": 32768,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.14/esp32-color-kit-partitions.bin",
+            "sha256": "5eb2c4f486107920d6c32fc971781615742017ebb65617f2b3be1561ead20d74",
+            "size": 3072
+          },
+          {
+            "name": "OTA data",
+            "data": "",
+            "offset": 57344,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.14/esp32-color-kit-boot-app0.bin",
+            "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
+            "size": 8192
+          },
+          {
+            "name": "Firmware",
+            "data": "",
+            "offset": 65536,
+            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.14/esp32-color-kit-firmware.bin",
+            "sha256": "760be4c4991e36dcd5e1eaf9af5edcf0b3b9a94338833f1c3df81c77e659198b",
+            "size": 2342448
+          }
+        ]
+      },
       {
         "name": "0.1.13",
         "channel": "stable",
@@ -361,47 +402,6 @@
             "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.12/esp32-color-kit-firmware.bin",
             "sha256": "6934b50246b87061fc6b4d6cc226c37915d27bb7c6d49efb3e13714aa9314f87",
             "size": 2171456
-          }
-        ]
-      },
-      {
-        "name": "0.1.11",
-        "channel": "stable",
-        "publishedAt": "2026-10-25T06:33:06Z",
-        "releaseUrl": "https://github.com/ThingPulse/esp32-gadget-os/releases/tag/v0.1.11",
-        "notes": "",
-        "partitions": [
-          {
-            "name": "Bootloader",
-            "data": "",
-            "offset": 4096,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.11/esp32-color-kit-bootloader.bin",
-            "sha256": "cef17495da011e6feaa4ecd5d8e786bd70fdd35cbc3e622d372d039dab4e4cd1",
-            "size": 23520
-          },
-          {
-            "name": "Partition table",
-            "data": "",
-            "offset": 32768,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.11/esp32-color-kit-partitions.bin",
-            "sha256": "5eb2c4f486107920d6c32fc971781615742017ebb65617f2b3be1561ead20d74",
-            "size": 3072
-          },
-          {
-            "name": "OTA data",
-            "data": "",
-            "offset": 57344,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.11/esp32-color-kit-boot-app0.bin",
-            "sha256": "f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0",
-            "size": 8192
-          },
-          {
-            "name": "Firmware",
-            "data": "",
-            "offset": 65536,
-            "url": "/assets/generated/tp-color-kit-grande-ckos/0.1.11/esp32-color-kit-firmware.bin",
-            "sha256": "2dc33eda1d9c744dab3506efb1236f6e10f26eb4207f0fce91415d5ef859b675",
-            "size": 2170800
           }
         ]
       }
