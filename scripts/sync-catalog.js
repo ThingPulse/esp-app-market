@@ -156,15 +156,27 @@ async function loadManifest(release, source, validateManifest) {
   return manifest;
 }
 
+// Older releases may predate market integration; only manifests opt releases into the catalog.
+function selectReleases(releases, source, includeSnapshots) {
+  const published = releases.filter(release => !release.draft &&
+    release.assets.some(asset => asset.name === (source.manifestAsset || 'app-market.json')));
+  const stable = published.filter(release => !release.prerelease).slice(0, source.retainVersions || 3);
+  const snapshots = includeSnapshots
+    ? published.filter(release => release.prerelease).slice(0, source.retainSnapshots || 3) : [];
+  return [...stable, ...snapshots];
+}
+
+// Bootstrap new sources from the manual entry, but never downgrade an automated catalog silently.
+function allowManualFallback(source, manualApps, currentApps) {
+  return manualApps.some(app => app.id === source.id) &&
+    !currentApps.some(app => app.id === source.id && app.source?.type === 'github-release');
+}
+
 async function syncSource(source, options) {
   const releases = await fetchJson(`https://api.github.com/repos/${source.repository}/releases?per_page=100`);
-  const published = releases.filter(release => !release.draft);
-  const stable = published.filter(release => !release.prerelease).slice(0, source.retainVersions || 3);
-  const snapshots = options.includeSnapshots
-    ? published.filter(release => release.prerelease).slice(0, source.retainSnapshots || 3)
-    : [];
-  const selected = [...stable, ...snapshots];
+  const selected = selectReleases(releases, source, options.includeSnapshots);
   if (selected.length === 0) {
+    if (options.allowManualFallback) return null;
     throw new Error(`No eligible releases found for ${source.repository}`);
   }
 
@@ -235,6 +247,7 @@ async function main() {
   const includeSnapshots = process.argv.includes('--include-snapshots');
   const check = process.argv.includes('--check');
   const manualApps = await readJson(MANUAL_CATALOG);
+  const currentApps = await readJson(OUTPUT_CATALOG);
   const sourceConfig = await readJson(SOURCES_FILE);
   validateSourceConfig(sourceConfig);
   const deviceIds = new Set((await readJson(DEVICE_CATALOG)).map(device => device.id));
@@ -252,11 +265,14 @@ async function main() {
     const automatedApps = [];
     for (const source of enabledSources) {
       process.stdout.write(`Syncing ${source.repository}${includeSnapshots ? ' with snapshots' : ''}...\n`);
-      automatedApps.push(await syncSource(source, {
+      const app = await syncSource(source, {
+        allowManualFallback: allowManualFallback(source, manualApps, currentApps),
         includeSnapshots,
         validateManifest,
         assetDirectory: temporaryAssets
-      }));
+      });
+      if (app) automatedApps.push(app);
+      else process.stdout.write(`Using manual fallback for ${source.id} until its first eligible market release.\n`);
     }
 
     const catalog = mergeCatalogs(manualApps, automatedApps);
@@ -303,6 +319,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  selectReleases,
+  allowManualFallback,
   mergeCatalogs,
   normalizeVersion,
   parseOffset,

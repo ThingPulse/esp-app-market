@@ -434,14 +434,28 @@
   {
     "id": "tp-icon-256-wled",
     "name": "WLED for Icon256",
-    "description": "Icon256 WordClock firmware.",
-    "version": "1.0.0",
+    "description": "Icon256 word clock, text messages, music equalizer and digital rain.",
+    "version": "17.0.1",
     "repository": "https://github.com/ThingPulse/WLED-Icon256/",
     "appIcon": "/assets/devices/icon256/icon256-thumb.png",
     "supportedDevices": [
       "tp-icon-256"
     ],
     "versions": [
+      {
+        "name": "17.0.1",
+        "notes": "Hardware-tested factory build from commit 29b062b7; includes the repeatable LED and speaker self-test fix.",
+        "partitions": [
+          {
+            "name": "Factory firmware",
+            "data": "",
+            "offset": 0,
+            "url": "/assets/apps/icon256-wled/app-firmware-17.0.1.bin",
+            "sha256": "099336acc8191f80a307df4204f40d11004ac4fe1c0f7cc4ae635596ace0d609",
+            "size": 1382944
+          }
+        ]
+      },
       {
         "name": "1.0.0",
         "partitions": [
@@ -453,7 +467,8 @@
           }
         ]
       }
-    ]
+    ],
+    "instructions": "Connect Icon256 by USB. Back up settings and presets before flashing. For an existing WLED installation, the device web UI also offers OTA updates."
   },
   {
     "id": "other-device",

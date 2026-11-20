@@ -66,3 +66,30 @@ describe('catalog synchronizer', () => {
     }), /Invalid GitHub repository/);
   });
 });
+
+// Integration migration: old OTA-only releases must not block new market packages.
+describe('Icon256 release migration', () => {
+  const { selectReleases, allowManualFallback } = require('./sync-catalog');
+  const source = { id: 'tp-icon-256-wled', manifestAsset: 'app-market.json', retainVersions: 1 };
+  const release = (tag, prerelease, assets = ['app-market.json'], draft = false) =>
+    ({ tag_name: tag, prerelease, draft, assets: assets.map(name => ({ name })) });
+  it('skips legacy releases before retention and excludes drafts and snapshots in production', () => {
+    const stable = release('v17.0.1', false);
+    const preview = release('v17.0.2-rc.1', true);
+    const releases = [release('v17.0.3', false, ['manifest.json']),
+      release('v17.0.2', false, ['app-market.json'], true), preview, stable];
+    assert.deepEqual(selectReleases(releases, source, false), [stable]);
+    assert.deepEqual(selectReleases(releases, source, true), [stable, preview]);
+  });
+  it('uses manual bootstrap only before the first automated release', () => {
+    const manual = [{ id: source.id }];
+    assert.equal(allowManualFallback(source, manual, manual), true);
+    assert.equal(allowManualFallback(source, [], manual), false);
+    assert.equal(allowManualFallback(source, manual,
+      [{ id: source.id, source: { type: 'github-release' } }]), false);
+  });
+  it('keeps a declared but broken manifest eligible so validation fails instead of hiding it', () => {
+    const broken = release('v17.0.1', false);
+    assert.deepEqual(selectReleases([broken], source, false), [broken]);
+  });
+});

@@ -102,3 +102,22 @@ test('snapshot release can be selected before flashing', async ({ page }) => {
   await expect(page.getByText('Snapshot firmware')).toBeVisible();
   await expect(page.getByText('This is a prerelease build intended for testing.')).toBeVisible();
 });
+
+test('Icon256 offers the tested factory update and downloads the expected image', async ({ page }) => {
+  await openCatalog(page);
+  await page.locator('.device-card').filter({ hasText: 'Icon256' })
+    .getByRole('link', { name: /Browse firmware/i }).click();
+  await page.locator('.app-card').filter({ hasText: 'WLED for Icon256' })
+    .getByRole('link', { name: /Install/i }).click();
+  await expect(page.locator('.firmware-summary')).toContainText('17.0.1');
+  await expect(page.locator('.instructions')).toContainText('Back up settings and presets');
+  const response = await page.request.get('/assets/apps/icon256-wled/app-firmware-17.0.1.bin');
+  expect(response.ok()).toBeTruthy();
+  const firmware = await response.body();
+  const { createHash } = await import('node:crypto');
+  expect(createHash('sha256').update(firmware).digest('hex'))
+    .toBe('099336acc8191f80a307df4204f40d11004ac4fe1c0f7cc4ae635596ace0d609');
+  expect(firmware[0]).toBe(0xe9);
+  expect(firmware[0x10000]).toBe(0xe9);
+  await expect(page.getByRole('button', { name: /Connect & install/i })).toBeEnabled();
+});

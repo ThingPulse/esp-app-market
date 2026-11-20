@@ -24,6 +24,14 @@
       "manifestAsset": "app-market-esp32-color-kit.json",
       "retainVersions": 3,
       "retainSnapshots": 3
+    },
+    {
+      "id": "tp-icon-256-wled",
+      "repository": "ThingPulse/WLED-Icon256",
+      "enabled": true,
+      "manifestAsset": "app-market.json",
+      "retainVersions": 3,
+      "retainSnapshots": 3
     }
   ]
 }

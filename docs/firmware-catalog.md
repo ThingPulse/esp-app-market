@@ -183,3 +183,27 @@ poll remains the recovery mechanism and is enough for the initial rollout.
 For snapshot previews, configure a separate preview hostname or Docker tag if
 the downloadable workflow artifact is not convenient. Web Serial requires a
 secure context, except that browsers also allow localhost for local testing.
+
+### Icon256 migration
+
+`tp-icon-256-wled` is registered against `ThingPulse/WLED-Icon256`, targeting
+`tp-icon-256`. The manual fallback bundles the hardware-tested 17.0.1 factory
+build from commit `29b062b7dd8feeba0ed3abc2258645dea7d9ae29`; its provenance and
+component hashes are in `src/assets/apps/icon256-wled/manifest.json`. This is the
+same image as the production flasher, not an independently published OTA release.
+
+The Icon256 release workflow now attaches `app-market.json`, `icon256.png`, and a
+separate `.factory.bin` alongside its OTA assets. Publish a **non-draft stable
+release** built from a tag containing that workflow change to enable automatic
+production import. Prereleases are available only in snapshot previews. A tag
+alone, or an OTA-only release, is insufficient. The hourly sync builds the catalog
+and dispatches the Docker publishing workflow when generated content changes.
+
+Releases without the configured market manifest are skipped before retention.
+A registered source with no eligible market release may use its manual entry only
+until an automated release has been imported. Invalid declared manifests and
+checksum failures still fail synchronization and preserve the committed catalog.
+
+The USB installer writes the factory image at zero. Back up device settings and
+presets first; existing WLED users can use the device's OTA updater instead.
+Do not upload the `.factory.bin` to WLED's OTA endpoint.
